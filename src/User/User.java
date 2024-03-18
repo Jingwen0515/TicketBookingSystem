@@ -4,10 +4,12 @@
  */
 package User;
 
+import DBM.FileManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 
@@ -15,8 +17,8 @@ import java.io.InputStreamReader;
  *
  * @author jingwen
  */
-public class user {
-    private String userID;
+public class User {
+    private String userName;
     private String userPassword;
     private String emailAddress;
     private String role;
@@ -25,12 +27,12 @@ public class user {
     
     
 
-    public user() {
+    public User() {
         
     }
     
-    public String getUserID(){
-        return this.userID;
+    public String getUsername(){
+        return this.userName;
     }
     
     public String getUserPassword(){
@@ -45,7 +47,7 @@ public class user {
             String[] parts = line.split(",");
             if (parts.length == 6 && parts[0].equals(targetUsername) && parts[1].equals(targetPassword)) {
                 // If the username and password match the target username and password, return true
-                this.userID = parts[0];
+                this.userName = parts[0];
                 this.userPassword = parts[1];
                 this.emailAddress = parts[2];
                 this.role = parts[3];
@@ -61,10 +63,36 @@ public class user {
     return false; // If no match found or an exception occurs, return false
     }
     
+//    public static String[] loginAccess(String loginUserID,String loginPassword){
+//        FileManager file = new FileManager("User.txt");
+//        ArrayList<String> userData = file.readFile();
+//        String[] savedData = new String[7];
+//        int count = 0; 
+//
+//        for(int i=0 ; i< userData.size();i++){
+//            String line = userData.get(i);
+//            String[] data = line.split("\|");
+//
+//            if (loginUserID.equals(data[0]) && loginPassword.equals(data[1])){
+//                savedData = data;
+//                count++;
+//            }
+//        }
+//
+//        if (count == 0){
+//            savedData[5] = "fail";
+//            return savedData;
+//        }
+//        else if (count == 1){
+//            return savedData;
+//        }
+//        else{
+//            savedData[5] = "fail";
+//            return savedData;
+//        }
+//    }
+    
     public String getUserRole(){
         return this.role;
     }
-    
-    
-
 }

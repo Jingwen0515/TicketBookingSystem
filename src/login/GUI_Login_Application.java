@@ -1,7 +1,7 @@
 package login;
 
-import User.UserMainMenu;
-import User.user;
+import User.GUI_PassengerMainMenu;
+import User.User;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author jingwen
  */
-public class Login_Application extends javax.swing.JFrame {
+public class GUI_Login_Application extends javax.swing.JFrame {
 
     /**
      * Creates new form Login_Application
      */
-    public Login_Application() {
+    public GUI_Login_Application() {
         initComponents();
     }
 
@@ -164,11 +164,11 @@ public class Login_Application extends javax.swing.JFrame {
     } else {
         try (InputStream inputStream = getClass().getResourceAsStream("/Assets/userdata.txt")) {
             if (inputStream != null) {
-                user user1 = new user();
+                User user1 = new User();
                 if (user1.validateLogin(inputStream, train_username.getText(), new String(train_password.getPassword()))) {
 //                    JOptionPane.showMessageDialog(null, "Login successful! UserID: " + user1.getUserID());
                     if(user1.getUserRole().equals("user")){
-                        UserMainMenu mainmenu = new UserMainMenu();
+                        GUI_PassengerMainMenu mainmenu = new GUI_PassengerMainMenu();
                         mainmenu.setVisible(true);
                         dispose();
                     }
@@ -186,7 +186,7 @@ public class Login_Application extends javax.swing.JFrame {
 
     private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_buttonActionPerformed
         // TODO add your handling code here:
-        NewUser nUser = new NewUser();
+        GUI_RegisterNewUser nUser = new GUI_RegisterNewUser();
         nUser.setVisible(true);
         dispose();
     }//GEN-LAST:event_register_buttonActionPerformed
@@ -221,20 +221,21 @@ public class Login_Application extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Login_Application.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login_Application().setVisible(true);
+                new GUI_Login_Application().setVisible(true);
             }
         });
     }

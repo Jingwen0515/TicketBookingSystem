@@ -129,8 +129,8 @@ public class FileManager {
     public ArrayList<String> readFile() {
         ArrayList<String> object = new ArrayList<String>();
         try{
-            FileReader file = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(file);
+//            FileReader file = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName)));
             String line;
             while ((line = reader.readLine()) != null){
                 object.add(line);

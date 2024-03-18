@@ -4,8 +4,8 @@
  */
 package login;
 
-import User.UserMainMenu;
-import User.user;
+import User.GUI_PassengerMainMenu;
+import User.User;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,12 +20,12 @@ import javax.swing.JOptionPane;
  *
  * @author jingwen
  */
-public class NewUser extends javax.swing.JFrame {
+public class GUI_RegisterNewUser extends javax.swing.JFrame {
 
     /**
      * Creates new form NewUser
      */
-    public NewUser() {
+    public GUI_RegisterNewUser() {
         initComponents();
     }
 
@@ -271,7 +271,7 @@ public class NewUser extends javax.swing.JFrame {
     }//GEN-LAST:event_newPhoneNumberActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        Login_Application login = new Login_Application();
+        GUI_Login_Application login = new GUI_Login_Application();
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
@@ -321,7 +321,7 @@ public class NewUser extends javax.swing.JFrame {
                     String userData = newUserName.getText() + "," + new String(newPassword.getPassword()) + "," + newEmail.getText() + ",user," + newFirstName.getText() + "," + newLastName.getText() + "\n";
                     writer.write(userData);
                     JOptionPane.showMessageDialog(null, "Account Successfully Created!");
-                    Login_Application login = new Login_Application();
+                    GUI_Login_Application login = new GUI_Login_Application();
                     login.setVisible(true);
                     dispose();
                 } 
@@ -355,20 +355,21 @@ public class NewUser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_RegisterNewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_RegisterNewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_RegisterNewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_RegisterNewUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewUser().setVisible(true);
+                new GUI_RegisterNewUser().setVisible(true);
             }
         });
     }
