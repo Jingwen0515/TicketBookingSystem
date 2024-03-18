@@ -20,10 +20,10 @@ public class Train {
     // public String departureLocation;
     // public String arrivalLocation;
     // public String journeyDuration;
-    public ArrayList<String> trainSchedule;
-    HashMap<String, String> seatType = new HashMap<>();
-    HashMap<String, Double> ticketCost = new HashMap<>();
-    HashMap<String, Boolean> seatAvailability = new HashMap<>();
+//    public ArrayList<String> trainSchedule;
+//    HashMap<String, String> seatType = new HashMap<>();
+//    HashMap<String, Double> ticketCost = new HashMap<>();
+//    HashMap<String, Boolean> seatAvailability = new HashMap<>();
 //    public admin createdByAdmin;
 
     public void Train(){
