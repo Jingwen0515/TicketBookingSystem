@@ -39,28 +39,24 @@ public class User {
         return this.userPassword;
     }
     
-    public boolean validateLogin(InputStream inputStream, String targetUsername, String targetPassword) {
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            // Split the line by commas
-            String[] parts = line.split(",");
-            if (parts.length == 6 && parts[0].equals(targetUsername) && parts[1].equals(targetPassword)) {
-                // If the username and password match the target username and password, return true
-                this.userName = parts[0];
-                this.userPassword = parts[1];
-                this.emailAddress = parts[2];
-                this.role = parts[3];
-                this.firstName = parts[4];
-                this.lastName = parts[5];
-                return true;
+    public static String[] validateLogin(String targetUsername,String targetPassword){
+        FileManager file = new FileManager("/Assets/userdata.txt");
+        ArrayList<String[]> userData = file.saveTo2DArrayList();
+        String[] savedData = new String[7];
+        boolean isFound = false;
+
+        for(String[] data : userData){
+            if(targetUsername.equals(data[0]) && targetPassword.equals(data[1])){
+                savedData = data;
+                isFound = true;
+                break;
             }
         }
-    } 
-    catch (IOException e) {
-        e.printStackTrace(); // Handle or log the exception
-    }
-    return false; // If no match found or an exception occurs, return false
+
+        if(!isFound){
+            savedData[3]="Not Found";
+        }
+        return savedData;
     }
     
 //    public static String[] loginAccess(String loginUserID,String loginPassword){

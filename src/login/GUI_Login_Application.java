@@ -156,32 +156,32 @@ public class GUI_Login_Application extends javax.swing.JFrame {
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here
-
-    if (train_username.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Please fill in your username");
-    } else if (train_password.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Please fill in your password");
-    } else {
-        try (InputStream inputStream = getClass().getResourceAsStream("/Assets/userdata.txt")) {
-            if (inputStream != null) {
-                User user1 = new User();
-                if (user1.validateLogin(inputStream, train_username.getText(), new String(train_password.getPassword()))) {
-//                    JOptionPane.showMessageDialog(null, "Login successful! UserID: " + user1.getUserID());
-                    if(user1.getUserRole().equals("user")){
-                        GUI_PassengerMainMenu mainmenu = new GUI_PassengerMainMenu();
-                        mainmenu.setVisible(true);
-                        dispose();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Wrong username or password", "Message", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                System.err.println("File not found: /Assets/userdata.txt");
+        if (train_username.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill in your username");
+        } 
+        else if (train_password.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please fill in your password");
+        } 
+        else {
+            String targetUsername = train_username.getText();
+            String targetPassword = new String(train_password.getPassword());
+            String[] savedData = User.validateLogin(targetUsername, targetPassword);
+            String role = savedData[3];
+            switch(role){
+                case "passenger":
+//                    Passenger passenger = new Passenger();
+//                    GUI_PassengerMenu gui_passengerMenu = new GUI_PassengerMenu(passenger);
+                    System.out.println("Passenger Menu");
+                    break;
+                case "admin":
+//                    Admin admin = new Admin();
+//                    GUI_AdminMenu gui_adminMenu = new GUI_AdminMenu(admin);
+                    System.out.println("Admin Menu");
+                    break;
+                case "Not Found":
+                    JOptionPane.showMessageDialog(null, "Wrong UserName or Password");
             }
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception
         }
-    }
     }//GEN-LAST:event_login_buttonActionPerformed
 
     private void register_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_buttonActionPerformed
