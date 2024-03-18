@@ -4,6 +4,10 @@
  */
 package trainticket;
 
+import DBM.FileManager;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jingwen
@@ -15,6 +19,7 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
      */
     public GUI_showTrainSchedule() {
         initComponents();
+        displayTrainScheduleTable();
     }
 
     /**
@@ -51,20 +56,17 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
         trainScheduleTable.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         trainScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Train Number", "Departure Time", "Arrival Time", "Departure Location", "Arrival Location"
+                "ScheduleID", "Train Number", "Departure Time", "Arrival Time", "Departure Location", "Arrival Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -118,6 +120,25 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void displayTrainScheduleTable(){
+        // read dataline from file
+        DefaultTableModel model = (DefaultTableModel) trainScheduleTable.getModel();
+        FileManager getrow = new FileManager("/Assets/trainschedules.txt");
+        ArrayList<String> rows =  getrow.readFile();
+        
+        // Separate line into data
+        // ArrayList with String
+        for(int i=0 ; i< rows.size();i++){
+            String line = rows.get(i);
+            // System.out.println(line);
+            String[] data = line.split("\\|");
+            model.addRow(data);
+        }
+        System.out.println(rows.get(0));
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -1,6 +1,7 @@
 package login;
 
 import User.GUI_PassengerMainMenu;
+import User.Passenger;
 import User.User;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -169,9 +170,11 @@ public class GUI_Login_Application extends javax.swing.JFrame {
             String role = savedData[3];
             switch(role){
                 case "passenger":
-//                    Passenger passenger = new Passenger();
-//                    GUI_PassengerMenu gui_passengerMenu = new GUI_PassengerMenu(passenger);
-                    System.out.println("Passenger Menu");
+                    // Passenger passenger = new Passenger();
+                    GUI_PassengerMainMenu gui_passengerMainMenu = new GUI_PassengerMainMenu();
+                    gui_passengerMainMenu.setVisible(true);
+                    dispose();
+                    // System.out.println("Passenger Menu");
                     break;
                 case "admin":
 //                    Admin admin = new Admin();

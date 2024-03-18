@@ -2,6 +2,7 @@ package User;
 
 
 import javax.swing.JOptionPane;
+import trainticket.GUI_showTrainSchedule;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -176,7 +177,11 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
 
     private void showTrainScheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showTrainScheduleLabelMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Label clicked!");
+        GUI_showTrainSchedule gui_showTrainSchedule = new GUI_showTrainSchedule();
+        gui_showTrainSchedule.setVisible(true);
+        dispose();
+        
+        // JOptionPane.showMessageDialog(null, "Label clicked!");
     }//GEN-LAST:event_showTrainScheduleLabelMouseClicked
 
     private void showTrainScheduleLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showTrainScheduleLabel1MouseClicked
