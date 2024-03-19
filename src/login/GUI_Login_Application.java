@@ -167,11 +167,11 @@ public class GUI_Login_Application extends javax.swing.JFrame {
             String targetUsername = train_username.getText();
             String targetPassword = new String(train_password.getPassword());
             String[] savedData = User.validateLogin(targetUsername, targetPassword);
-            String role = savedData[3];
+            String role = savedData[4];
             switch(role){
                 case "passenger":
-                    // Passenger passenger = new Passenger();
-                    GUI_PassengerMainMenu gui_passengerMainMenu = new GUI_PassengerMainMenu();
+                    Passenger passenger = new Passenger(savedData[0]);
+                    GUI_PassengerMainMenu gui_passengerMainMenu = new GUI_PassengerMainMenu(passenger);
                     gui_passengerMainMenu.setVisible(true);
                     dispose();
                     // System.out.println("Passenger Menu");

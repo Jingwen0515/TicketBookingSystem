@@ -42,11 +42,11 @@ public class User {
     public static String[] validateLogin(String targetUsername,String targetPassword){
         FileManager file = new FileManager("/Assets/userdata.txt");
         ArrayList<String[]> userData = file.saveTo2DArrayList();
-        String[] savedData = new String[7];
+        String[] savedData = new String[8];
         boolean isFound = false;
 
         for(String[] data : userData){
-            if(targetUsername.equals(data[0]) && targetPassword.equals(data[1])){
+            if(targetUsername.equals(data[1]) && targetPassword.equals(data[2])){
                 savedData = data;
                 isFound = true;
                 break;
@@ -54,7 +54,7 @@ public class User {
         }
 
         if(!isFound){
-            savedData[3]="Not Found";
+            savedData[4]="Not Found";
         }
         return savedData;
     }

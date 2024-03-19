@@ -10,4 +10,12 @@ package User;
  */
 public class Passenger extends User{
     private String passengerID;
+    
+    public Passenger(String passengerID){
+        this.passengerID = passengerID;
+    }
+    
+    public String getPassengerID(){
+        return this.passengerID;
+    }
 }
