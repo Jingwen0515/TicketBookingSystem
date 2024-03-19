@@ -2,6 +2,7 @@ package User;
 
 
 import javax.swing.JOptionPane;
+import trainticket.GUI_searchTrainSchedule;
 import trainticket.GUI_showTrainSchedule;
 
 /*
@@ -41,7 +42,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         showAllBookingLabel = new javax.swing.JLabel();
         makeBookingLabel = new javax.swing.JLabel();
         showPersonalInformationLabel = new javax.swing.JLabel();
-        showTrainScheduleLabel1 = new javax.swing.JLabel();
+        searchTrainScheduleLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,11 +107,11 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         showPersonalInformationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         showPersonalInformationLabel.setText("5) My Personal Information");
 
-        showTrainScheduleLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
-        showTrainScheduleLabel1.setText("2) Search Train Schedule with Source and Destination");
-        showTrainScheduleLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        searchTrainScheduleLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
+        searchTrainScheduleLabel1.setText("2) Search Train Schedule with Source and Destination");
+        searchTrainScheduleLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showTrainScheduleLabel1MouseClicked(evt);
+                searchTrainScheduleLabel1MouseClicked(evt);
             }
         });
 
@@ -125,7 +126,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                     .addComponent(showAllBookingLabel)
                     .addComponent(makeBookingLabel)
                     .addComponent(showPersonalInformationLabel)
-                    .addComponent(showTrainScheduleLabel1))
+                    .addComponent(searchTrainScheduleLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         InfoPanelLayout.setVerticalGroup(
@@ -134,7 +135,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(showTrainScheduleLabel)
                 .addGap(18, 18, 18)
-                .addComponent(showTrainScheduleLabel1)
+                .addComponent(searchTrainScheduleLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(makeBookingLabel)
                 .addGap(18, 18, 18)
@@ -180,13 +181,14 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         GUI_showTrainSchedule gui_showTrainSchedule = new GUI_showTrainSchedule();
         gui_showTrainSchedule.setVisible(true);
         dispose();
-        
-        // JOptionPane.showMessageDialog(null, "Label clicked!");
     }//GEN-LAST:event_showTrainScheduleLabelMouseClicked
 
-    private void showTrainScheduleLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showTrainScheduleLabel1MouseClicked
+    private void searchTrainScheduleLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTrainScheduleLabel1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_showTrainScheduleLabel1MouseClicked
+        GUI_searchTrainSchedule gui_searchTrainSchedule = new GUI_searchTrainSchedule();
+        gui_searchTrainSchedule.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_searchTrainScheduleLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -247,9 +249,9 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel makeBookingLabel;
+    private javax.swing.JLabel searchTrainScheduleLabel1;
     private javax.swing.JLabel showAllBookingLabel;
     private javax.swing.JLabel showPersonalInformationLabel;
     private javax.swing.JLabel showTrainScheduleLabel;
-    private javax.swing.JLabel showTrainScheduleLabel1;
     // End of variables declaration//GEN-END:variables
 }
