@@ -37,7 +37,7 @@ public class Train {
     }
     
     //Constructor for Passenger
-    public Train(String[] savedData, Passenger currentPassenger){
+    public Train(String[] savedData){
 //        String [] savedData = searchForRespectiveTrain(trainScheduleNumber);
         this.trainScheduleNumber = savedData[0];
         this.trainNumber = savedData[1];
@@ -46,7 +46,7 @@ public class Train {
         this.departureTime = savedData[4];
         this.arrivalTime = savedData[5];     
 //        this.current_passenger = currentPassenger;
-        Booking newBooking = new Booking(this, currentPassenger);
+//        Booking newBooking = new Booking(this, currentPassenger);
         
     }
     

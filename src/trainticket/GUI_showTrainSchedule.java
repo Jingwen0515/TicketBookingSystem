@@ -192,8 +192,8 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
         if(savedData[3].equals("Not Found")){
             JOptionPane.showMessageDialog(null, "Incorrect Train Schedule ID");
         } else{
-            Train buyTicket = new Train(savedData,current_passenger);
-            GUI_Booking gui_booking = new GUI_Booking();
+            Train buyTicket = new Train(savedData);
+            GUI_Booking gui_booking = new GUI_Booking(buyTicket,current_passenger);
             gui_booking.setVisible(true);
             dispose();
         }

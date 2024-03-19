@@ -4,10 +4,12 @@
  */
 package trainticket.TicketBooking;
 
+import User.Passenger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.JCheckBox;
+import trainticket.Train;
 
 /**
  *
@@ -16,10 +18,12 @@ import javax.swing.JCheckBox;
 public class GUI_Booking extends javax.swing.JFrame {
     private JCheckBox [] seatCheckBoxes;
     private double totalFee = 0.0;
+    private Passenger current_passenger;
+    private Train buy_ticket;
     /**
      * Creates new form GUI_Booking
      */
-    public GUI_Booking() {
+    public GUI_Booking(Train buyTicket,Passenger currentPassenger) {
         initComponents();
         JCheckBox[] seatCheckBoxes = {
             A01, A02, A03, A04, A05, A06,
@@ -31,6 +35,8 @@ public class GUI_Booking extends javax.swing.JFrame {
             G01, G02, G03, G04, G05, G06,
             H01, H02, H03, H04, H05, H06
         };
+        this.current_passenger = currentPassenger;
+        this.buy_ticket = buyTicket;
         
         for (JCheckBox checkBox : seatCheckBoxes) {
             checkBox.addActionListener(new ActionListener() {
@@ -180,8 +186,8 @@ public class GUI_Booking extends javax.swing.JFrame {
         seatsSelectedLabelScrollPane = new javax.swing.JScrollPane();
         seatsSelectedLabel = new javax.swing.JLabel();
         chooseSeatsLabelHeading = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        confirmAndPayButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1141,16 +1147,21 @@ public class GUI_Booking extends javax.swing.JFrame {
         chooseSeatsLabelHeading.setText("Choose Seats");
         chooseSeatsLabelHeading.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jButton2.setText("Confirm & Pay");
+        confirmAndPayButton.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        confirmAndPayButton.setText("Confirm & Pay");
+        confirmAndPayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmAndPayButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -1170,9 +1181,9 @@ public class GUI_Booking extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MainPanelLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(confirmAndPayButton))
                     .addComponent(TablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(MainPanelLayout.createSequentialGroup()
                         .addComponent(businessClassPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1197,8 +1208,8 @@ public class GUI_Booking extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(cancelButton)
+                    .addComponent(confirmAndPayButton))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -1221,9 +1232,9 @@ public class GUI_Booking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
@@ -1288,6 +1299,11 @@ public class GUI_Booking extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        calculateTotalFee(B06);
     }//GEN-LAST:event_B06ActionPerformed
+
+    private void confirmAndPayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAndPayButtonActionPerformed
+        // TODO add your handling code here:
+        Booking new_booking = new Booking(buy_ticket, current_passenger);
+    }//GEN-LAST:event_confirmAndPayButtonActionPerformed
     
       
     
@@ -1351,37 +1367,37 @@ public class GUI_Booking extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI_Booking().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(GUI_Booking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GUI_Booking().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox A01;
@@ -1436,11 +1452,11 @@ public class GUI_Booking extends javax.swing.JFrame {
     private javax.swing.JPanel TablePanel;
     private javax.swing.JLabel businessClassLabel;
     private javax.swing.JPanel businessClassPanel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel chooseSeatsLabelHeading;
+    private javax.swing.JButton confirmAndPayButton;
     private javax.swing.JLabel economyClassLabel;
     private javax.swing.JLabel enterDetailsLabelHeading;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox49;
     private javax.swing.JCheckBox jCheckBox50;
     private javax.swing.JLabel jLabel10;
