@@ -50,6 +50,10 @@ public class Train {
         
     }
     
+    public String getTrainScheduleNumber(){
+        return this.trainScheduleNumber;
+    }
+    
     public static String[] searchForRespectiveTrain(String trainScheduleNumber){
        FileManager file = new FileManager("/Assets/trainschedules.txt");
         ArrayList<String[]> allTrainSchedule = file.saveTo2DArrayList();

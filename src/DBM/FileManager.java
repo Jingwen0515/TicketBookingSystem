@@ -24,6 +24,7 @@ public class FileManager {
     
     public void addToFile(String[] newObject){
         try{
+            //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(getClass().getResourceAsStream(fileName));
             FileWriter file = new FileWriter(fileName,true);
             BufferedWriter writer = new BufferedWriter(file);
             String line = String.join("|", newObject);
