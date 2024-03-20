@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import trainticket.Train;
 
 /**
@@ -20,6 +21,7 @@ public class GUI_Booking extends javax.swing.JFrame {
     private double totalFee = 0.0;
     private Passenger current_passenger;
     private Train buy_ticket;
+    private boolean seatsSelected = false;
     /**
      * Creates new form GUI_Booking
      */
@@ -723,7 +725,8 @@ public class GUI_Booking extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(H05)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(H06))))
+                                        .addComponent(H06)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(businessClassPanelLayout.createSequentialGroup()
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
@@ -781,7 +784,7 @@ public class GUI_Booking extends javax.swing.JFrame {
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
                                         .addComponent(businessClassLabel)
                                         .addGap(74, 74, 74)))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
                                         .addComponent(A04)
@@ -825,20 +828,21 @@ public class GUI_Booking extends javax.swing.JFrame {
                                 .addGroup(businessClassPanelLayout.createSequentialGroup()
                                     .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(businessClassPanelLayout.createSequentialGroup()
-                                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jLabel5)
-                                                .addComponent(jLabel6)
-                                                .addComponent(jLabel7)
-                                                .addComponent(A03)
+                                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(A03, javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(A02)
-                                                .addComponent(A01))
+                                                .addComponent(A01)
+                                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(jLabel5)
+                                                    .addComponent(jLabel6)
+                                                    .addComponent(jLabel7)))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(jLabel11)
                                                 .addComponent(jLabel12)
                                                 .addComponent(jLabel13)))
-                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(B03)
+                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(B03, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(B02)
                                             .addComponent(B01)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -846,8 +850,8 @@ public class GUI_Booking extends javax.swing.JFrame {
                                         .addComponent(jLabel17)
                                         .addComponent(jLabel18)
                                         .addComponent(jLabel19)))
-                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(C03)
+                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(C03, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(C02)
                                     .addComponent(C01)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -856,8 +860,8 @@ public class GUI_Booking extends javax.swing.JFrame {
                                     .addComponent(jLabel22)
                                     .addComponent(jLabel20)
                                     .addComponent(jLabel21))
-                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(D03)
+                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(D03, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(D02)
                                     .addComponent(D01))))
                         .addGroup(businessClassPanelLayout.createSequentialGroup()
@@ -885,23 +889,23 @@ public class GUI_Booking extends javax.swing.JFrame {
                             .addGroup(businessClassPanelLayout.createSequentialGroup()
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
-                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(A06)
+                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(A06, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(A05)
                                             .addComponent(A04))
                                         .addGap(32, 32, 32))
-                                    .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(B06)
+                                    .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(B06, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(B05)
                                         .addComponent(B04)))
                                 .addGap(32, 32, 32))
-                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(C06)
+                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(C06, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(C05)
                                 .addComponent(C04)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(D06)
+                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(D06, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(D05)
                             .addComponent(D04))))
                 .addGap(63, 63, 63)
@@ -933,23 +937,23 @@ public class GUI_Booking extends javax.swing.JFrame {
                             .addGroup(businessClassPanelLayout.createSequentialGroup()
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
-                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(E06)
+                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(E06, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(E05)
                                             .addComponent(E04))
                                         .addGap(32, 32, 32))
-                                    .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(F06)
+                                    .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(F06, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(F05)
                                         .addComponent(F04)))
                                 .addGap(32, 32, 32))
-                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(G06)
+                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(G06, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(G05)
                                 .addComponent(G04)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(H06)
+                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(H06, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(H05)
                             .addComponent(H04)))
                     .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -958,23 +962,23 @@ public class GUI_Booking extends javax.swing.JFrame {
                                 .addGroup(businessClassPanelLayout.createSequentialGroup()
                                     .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(businessClassPanelLayout.createSequentialGroup()
-                                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(E03)
+                                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(E03, javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(E02)
                                                 .addComponent(E01))
                                             .addGap(32, 32, 32))
-                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(F03)
+                                        .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(F03, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(F02)
                                             .addComponent(F01)))
                                     .addGap(32, 32, 32))
-                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(G03)
+                                .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(G03, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(G02)
                                     .addComponent(G01)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(H03)
+                            .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(H03, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(H02)
                                 .addComponent(H01)))
                         .addGroup(businessClassPanelLayout.createSequentialGroup()
@@ -1053,7 +1057,6 @@ public class GUI_Booking extends javax.swing.JFrame {
         seatsSelectedLabelScrollPane.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
         seatsSelectedLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        seatsSelectedLabel.setText("-");
         seatsSelectedLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         seatsSelectedLabelScrollPane.setViewportView(seatsSelectedLabel);
 
@@ -1080,11 +1083,10 @@ public class GUI_Booking extends javax.swing.JFrame {
                                     .addComponent(jLabel58))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                                .addComponent(jTextField3)
-                                .addComponent(jTextField4)
-                                .addComponent(jTextField1))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField1)
                             .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(seatsSelectedLabelScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1302,7 +1304,24 @@ public class GUI_Booking extends javax.swing.JFrame {
 
     private void confirmAndPayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAndPayButtonActionPerformed
         // TODO add your handling code here:
-        Booking new_booking = new Booking(buy_ticket, current_passenger);
+        if(!seatsSelected){
+            JOptionPane.showMessageDialog(null,"Please select at least one seat.");
+        }
+        
+        else if(jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty()
+                || jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill in all your details.");
+        }
+        
+        else if(!jCheckBox50.isSelected() || !jCheckBox49.isSelected()){
+            JOptionPane.showMessageDialog(null,"Please ensure you have read the T&C's and check the Check Box.");
+        }
+        
+        else{
+            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel);
+            JOptionPane.showMessageDialog(null,"You have successfully booked your tickets."
+                    + " Please go to the 'Show My Bookings' to view your ticket");
+        }
     }//GEN-LAST:event_confirmAndPayButtonActionPerformed
     
       
@@ -1354,9 +1373,11 @@ public class GUI_Booking extends javax.swing.JFrame {
     String seatName = checkbox.getName(); // Get the text of the checkbox (assuming it contains seat information)
     
     if (checkbox.isSelected()) {
-        labelText += seatName + " "; // Append the seat information to the label text
+        labelText += seatName + ":"; // Append the seat information to the label text
+        seatsSelected = true;
     } else {
         labelText = labelText.replace(seatName + " ", ""); // Remove the seat information if the checkbox is deselected
+        seatsSelected = false;
     }
     
     seatsSelectedLabel.setText(labelText); // Set the updated text to the label

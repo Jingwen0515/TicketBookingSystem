@@ -22,6 +22,7 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
      * Creates new form GUI_showTrainSchedule
      */
     private Passenger current_passenger;
+    
     public GUI_showTrainSchedule(Passenger currentPassenger) {
         this.current_passenger = currentPassenger;
         initComponents();
