@@ -42,7 +42,6 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         InfoPanel = new javax.swing.JPanel();
         showTrainScheduleLabel = new javax.swing.JLabel();
         showAllBookingLabel = new javax.swing.JLabel();
-        makeBookingLabel = new javax.swing.JLabel();
         showPersonalInformationLabel = new javax.swing.JLabel();
         searchTrainScheduleLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -58,7 +57,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         jLabel3.setText("Welcome to ChooChoo Train Ticket Reservation System! ");
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel4.setText("Below shows all actions that you can perform. Please choose one.");
+        jLabel4.setText("Below shows all actions that you can perform. Please choose one to continue.");
 
         LogOut.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         LogOut.setText("Logout");
@@ -93,7 +92,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         InfoPanel.setBackground(new java.awt.Color(242, 219, 193));
 
         showTrainScheduleLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
-        showTrainScheduleLabel.setText("1) Show All Train Schedules");
+        showTrainScheduleLabel.setText("1) Buy Ticket");
         showTrainScheduleLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showTrainScheduleLabelMouseClicked(evt);
@@ -101,13 +100,10 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         });
 
         showAllBookingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
-        showAllBookingLabel.setText("4) Show All Bookings");
-
-        makeBookingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
-        makeBookingLabel.setText("3) Make a Booking");
+        showAllBookingLabel.setText("3) Show All Bookings");
 
         showPersonalInformationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
-        showPersonalInformationLabel.setText("5) My Personal Information");
+        showPersonalInformationLabel.setText("4) My Personal Information");
 
         searchTrainScheduleLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         searchTrainScheduleLabel1.setText("2) Search Train Schedule with Source and Destination");
@@ -126,10 +122,9 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                 .addGroup(InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showTrainScheduleLabel)
                     .addComponent(showAllBookingLabel)
-                    .addComponent(makeBookingLabel)
                     .addComponent(showPersonalInformationLabel)
                     .addComponent(searchTrainScheduleLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         InfoPanelLayout.setVerticalGroup(
             InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,12 +134,10 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(searchTrainScheduleLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(makeBookingLabel)
-                .addGap(18, 18, 18)
                 .addComponent(showAllBookingLabel)
                 .addGap(18, 18, 18)
                 .addComponent(showPersonalInformationLabel)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jSeparator1.setForeground(new java.awt.Color(153, 153, 255));
@@ -173,7 +166,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 560));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,7 +180,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
 
     private void searchTrainScheduleLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchTrainScheduleLabel1MouseClicked
         // TODO add your handling code here:
-        GUI_searchTrainSchedule gui_searchTrainSchedule = new GUI_searchTrainSchedule();
+        GUI_searchTrainSchedule gui_searchTrainSchedule = new GUI_searchTrainSchedule(current_passenger);
         gui_searchTrainSchedule.setVisible(true);
         dispose();
     }//GEN-LAST:event_searchTrainScheduleLabel1MouseClicked
@@ -250,7 +243,6 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel makeBookingLabel;
     private javax.swing.JLabel searchTrainScheduleLabel1;
     private javax.swing.JLabel showAllBookingLabel;
     private javax.swing.JLabel showPersonalInformationLabel;

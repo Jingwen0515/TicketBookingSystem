@@ -17,12 +17,12 @@ import trainticket.TicketBooking.Booking;
  * @author jingwen
  */
 public class Train {
-    private String trainScheduleNumber;
-    private String trainNumber;
-    private String departureLocation;
-    private String arrivalLocation;
-    private String departureTime;
-    private String arrivalTime;
+    public String trainScheduleNumber;
+    public String trainNumber;
+    public String departureLocation;
+    public String arrivalLocation;
+    public String departureTime;
+    public String arrivalTime;
 //    private Passenger current_passenger;
 
     //Constructor for Admin

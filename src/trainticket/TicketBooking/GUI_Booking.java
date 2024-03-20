@@ -8,10 +8,10 @@ import DBM.FileManager;
 import User.Passenger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import trainticket.Train;
 
@@ -25,6 +25,7 @@ public class GUI_Booking extends javax.swing.JFrame {
     private Passenger current_passenger;
     private Train buy_ticket;
     private ArrayList<String> selectedSeats = new ArrayList<>();
+    private boolean seatsSelected = false;
     /**
      * Creates new form GUI_Booking
      */
@@ -730,7 +731,8 @@ public class GUI_Booking extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(H05)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(H06))))
+                                        .addComponent(H06)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(businessClassPanelLayout.createSequentialGroup()
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
@@ -788,6 +790,7 @@ public class GUI_Booking extends javax.swing.JFrame {
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
                                         .addComponent(businessClassLabel)
                                         .addGap(74, 74, 74)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(businessClassPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(businessClassPanelLayout.createSequentialGroup()
                                         .addComponent(A04)
@@ -1060,7 +1063,6 @@ public class GUI_Booking extends javax.swing.JFrame {
         seatsSelectedLabelScrollPane.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
         seatsSelectedLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        seatsSelectedLabel.setText("-");
         seatsSelectedLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         seatsSelectedLabelScrollPane.setViewportView(seatsSelectedLabel);
 
@@ -1087,7 +1089,7 @@ public class GUI_Booking extends javax.swing.JFrame {
                                     .addComponent(jLabel58))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
                             .addComponent(jTextField1)
@@ -1308,7 +1310,24 @@ public class GUI_Booking extends javax.swing.JFrame {
 
     private void confirmAndPayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAndPayButtonActionPerformed
         // TODO add your handling code here:
-        Booking new_booking = new Booking(buy_ticket, current_passenger);
+        if(!seatsSelected){
+            JOptionPane.showMessageDialog(null,"Please select at least one seat.");
+        }
+        
+        else if(jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty()
+                || jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Please fill in all your details.");
+        }
+        
+        else if(!jCheckBox50.isSelected() || !jCheckBox49.isSelected()){
+            JOptionPane.showMessageDialog(null,"Please ensure you have read the T&C's and check the Check Box.");
+        }
+        
+        else{
+            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel);
+            JOptionPane.showMessageDialog(null,"You have successfully booked your tickets."
+                    + " Please go to the 'Show My Bookings' to view your ticket");
+        }
     }//GEN-LAST:event_confirmAndPayButtonActionPerformed
     
       
