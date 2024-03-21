@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package User.Admin;
+package User.admin;
+
+import DBM.FileManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,11 +39,11 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        departureTimeLabel = new javax.swing.JTextField();
-        trainNumberLabel = new javax.swing.JTextField();
-        departureLocationLabel = new javax.swing.JTextField();
-        arrivalLocationLabel = new javax.swing.JTextField();
-        arrivalTimeLabel = new javax.swing.JTextField();
+        departureTimeTextField = new javax.swing.JTextField();
+        trainNumberTextField = new javax.swing.JTextField();
+        departureLocationTextField = new javax.swing.JTextField();
+        arrivalLocationTextField = new javax.swing.JTextField();
+        arrivalTimeTextField = new javax.swing.JTextField();
         addScheduleButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
@@ -65,15 +70,20 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel6.setText("Departure Location:");
 
-        departureTimeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        departureTimeTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        departureTimeTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departureTimeTextFieldActionPerformed(evt);
+            }
+        });
 
-        trainNumberLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        trainNumberTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
-        departureLocationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        departureLocationTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
-        arrivalLocationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        arrivalLocationTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
-        arrivalTimeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        arrivalTimeTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,11 +99,11 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(58, 58, 58)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(departureLocationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(arrivalLocationLabel)
-                    .addComponent(arrivalTimeLabel)
-                    .addComponent(departureTimeLabel)
-                    .addComponent(trainNumberLabel))
+                    .addComponent(departureLocationTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(arrivalLocationTextField)
+                    .addComponent(arrivalTimeTextField)
+                    .addComponent(departureTimeTextField)
+                    .addComponent(trainNumberTextField))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -102,31 +112,41 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(trainNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trainNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(departureTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departureTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(arrivalTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(arrivalTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(departureLocationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(departureLocationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(arrivalLocationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(arrivalLocationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
         addScheduleButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         addScheduleButton.setText("Add Schedule");
+        addScheduleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addScheduleButtonActionPerformed(evt);
+            }
+        });
 
         backButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,6 +180,46 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addScheduleButtonActionPerformed
+        // TODO add your handling code here:
+         ArrayList<String[]> previousData = new FileManager("/Assets/trainschedules.txt").saveTo2DArrayList();
+        boolean validInformation = false;
+        
+        if(!trainNumberTextField.getText().isEmpty()|| !departureTimeTextField.getText().isEmpty()|| !arrivalTimeTextField.getText().isEmpty()||
+                !departureLocationTextField.getText().isEmpty()|| !arrivalLocationTextField.getText().isEmpty()){
+            validInformation = true;
+        }
+        
+        for (int i=0;i<previousData.size();i++){
+            if(previousData.get(i)[1].equals(trainNumberTextField.getText()) && 
+                previousData.get(i)[2].equals(departureTimeTextField.getText())){
+            JOptionPane.showMessageDialog(null, "Train Schedule already exist.");
+            return;
+            }
+        }
+        
+        if(validInformation){
+            Admin admin = new Admin(trainNumberTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(),
+                departureLocationTextField.getText(), arrivalLocationTextField.getText());
+            JOptionPane.showMessageDialog(null, "Train Schedule successfully added");   
+            GUI_AdminMainMenu gui_adminMainMenu = new GUI_AdminMainMenu();
+            gui_adminMainMenu.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_addScheduleButtonActionPerformed
+
+    private void departureTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departureTimeTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_departureTimeTextFieldActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        GUI_AdminMainMenu gui_backToAdminMainMenu = new GUI_AdminMainMenu();
+        gui_backToAdminMainMenu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -197,11 +257,11 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addScheduleButton;
-    private javax.swing.JTextField arrivalLocationLabel;
-    private javax.swing.JTextField arrivalTimeLabel;
+    private javax.swing.JTextField arrivalLocationTextField;
+    private javax.swing.JTextField arrivalTimeTextField;
     private javax.swing.JButton backButton;
-    private javax.swing.JTextField departureLocationLabel;
-    private javax.swing.JTextField departureTimeLabel;
+    private javax.swing.JTextField departureLocationTextField;
+    private javax.swing.JTextField departureTimeTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -210,6 +270,6 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField trainNumberLabel;
+    private javax.swing.JTextField trainNumberTextField;
     // End of variables declaration//GEN-END:variables
 }

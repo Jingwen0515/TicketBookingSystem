@@ -3,6 +3,8 @@ package login;
 import User.GUI_PassengerMainMenu;
 import User.Passenger;
 import User.User;
+import User.admin.Admin;
+import User.admin.GUI_AdminMainMenu;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -178,8 +180,10 @@ public class GUI_Login_Application extends javax.swing.JFrame {
                     break;
                 case "admin":
 //                    Admin admin = new Admin();
-//                    GUI_AdminMenu gui_adminMenu = new GUI_AdminMenu(admin);
-                    System.out.println("Admin Menu");
+                    GUI_AdminMainMenu gui_adminMenu = new GUI_AdminMainMenu();
+                    gui_adminMenu.setVisible(true);
+                    dispose();
+//                    System.out.println("Admin Menu");
                     break;
                 case "Not Found":
                     JOptionPane.showMessageDialog(null, "Wrong UserName or Password");

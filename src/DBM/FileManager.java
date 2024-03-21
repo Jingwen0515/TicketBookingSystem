@@ -155,20 +155,22 @@ public class FileManager {
         }
     }
     
-    public void editFileDataV2(String primaryKey, int dataIndexToChange, String newData) {
+    public void editFileDataV2(String primaryKey, String[] newData) {
         ArrayList<String[]> dataLines = this.saveTo2DArrayList();
         boolean found = false;
         
         for (int i = 0; i < dataLines.size(); i++) {
             String[] currentLine = dataLines.get(i);
             if (currentLine.length > 0 && currentLine[0].equals(primaryKey)) {
-                if (dataIndexToChange >= 0 && dataIndexToChange < currentLine.length) {
-                    currentLine[dataIndexToChange] = newData;
+                // Check if the new data has the same length as the current line
+                if (newData.length == currentLine.length) {
+                    // Update the current line with the new data
+                    dataLines.set(i, newData);
                     found = true;
                     break; // No need to continue looping if the primary key is found and data changed
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid data index");
-                    return; // Exit method if the data index is invalid
+                    JOptionPane.showMessageDialog(null, "Invalid data length");
+                    return; // Exit method if the data length is invalid
                 }
             }
         }
@@ -181,6 +183,7 @@ public class FileManager {
         try {
             FileWriter file = new FileWriter(fileName);
             BufferedWriter writer = new BufferedWriter(file);
+            
             for (String[] data : dataLines) {
                 String line = String.join("|", data);
                 writer.write(line + "\n");
@@ -189,8 +192,9 @@ public class FileManager {
             writer.close(); // Close the writer after writing data
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+          }
     }
+   
     
     public ArrayList<String> readFile() {
         ArrayList<String> object = new ArrayList<String>();

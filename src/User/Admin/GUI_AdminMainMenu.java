@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package User.Admin;
+package User.admin;
 
 import trainticket.GUI_buyTicket;
 import trainticket.GUI_searchTrainSchedule;
@@ -152,16 +152,24 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
 
     private void showAllTrainScheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showAllTrainScheduleLabelMouseClicked
         // TODO add your handling code here:
-        
+        GUI_showAllTrainSchedule gui_showAllTrainSchedule = new GUI_showAllTrainSchedule();
+        gui_showAllTrainSchedule.setVisible(true);
+        dispose();
+       
     }//GEN-LAST:event_showAllTrainScheduleLabelMouseClicked
 
     private void modifyTrainScheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modifyTrainScheduleLabelMouseClicked
         // TODO add your handling code here:
-        
+        GUI_modifyTrainSchedule gui_modifyTrainSchedule = new GUI_modifyTrainSchedule();
+        gui_modifyTrainSchedule.setVisible(true);
+        dispose();
     }//GEN-LAST:event_modifyTrainScheduleLabelMouseClicked
 
     private void addTrainScheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTrainScheduleLabelMouseClicked
         // TODO add your handling code here:
+        GUI_addTrainSchedule gui_addTrainSchedule = new GUI_addTrainSchedule();
+        gui_addTrainSchedule.setVisible(true);
+        dispose();
     }//GEN-LAST:event_addTrainScheduleLabelMouseClicked
 
     /**

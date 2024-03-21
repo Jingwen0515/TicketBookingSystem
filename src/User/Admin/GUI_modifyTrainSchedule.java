@@ -2,19 +2,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package User.Admin;
+package User.admin;
+
+import DBM.FileManager;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author jingwen
  */
 public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
+    private String trainScheduleID;
+    private String originalTrainNumber;
+    private String originalDepartureTime;
+    private String originalArrivalTime;
+    private String originalDepartureLocation;
+    private String originalArrivalLocation;
+    private String originalStatus;
+    private boolean changesMade = false;
+    
 
     /**
      * Creates new form GUI_modifyTrainSchedule
      */
     public GUI_modifyTrainSchedule() {
         initComponents();
+        displayTable();
     }
 
     /**
@@ -47,15 +62,15 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         arrivalLocationTextField = new javax.swing.JTextField();
         departureLocationTextField = new javax.swing.JTextField();
         statusTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        makeChangesButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        jLabel1.setText("Add Train Schedule");
+        jLabel1.setText("Modify Train Schedule");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         ScheduleTable.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
@@ -64,15 +79,20 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ScheduleID", "Train Number", "Departure Location", "Arrival Location", "Departure Time", "Arrival Time"
+                "ScheduleID", "Train Number", "Departure Location", "Arrival Location", "Departure Time", "Arrival Time", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        ScheduleTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ScheduleTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(ScheduleTable);
@@ -83,7 +103,7 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -116,7 +136,6 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         jLabel9.setText("Status:");
 
         trainScheduleIDLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        trainScheduleIDLabel.setText("jLabel10");
 
         departureTimeTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
@@ -164,14 +183,14 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(52, 52, 52)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(trainScheduleIDLabel)
                             .addComponent(trainNumberTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                             .addComponent(departureTimeTextField)
                             .addComponent(arrivalTimeTextField)
                             .addComponent(departureLocationTextField)
                             .addComponent(arrivalLocationTextField)
-                            .addComponent(statusTextField))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(statusTextField)
+                            .addComponent(trainScheduleIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(374, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +198,10 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addComponent(trainScheduleIDLabel))
-                .addGap(18, 18, 18)
+                    .addComponent(trainScheduleIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(trainNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,11 +228,21 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jButton1.setText("Make Changes");
+        makeChangesButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        makeChangesButton.setText("Make Changes");
+        makeChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeChangesButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jButton2.setText("Back");
+        backButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,9 +255,9 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(backButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(makeChangesButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -242,8 +271,8 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(backButton)
+                    .addComponent(makeChangesButton))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -262,49 +291,161 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_statusTextFieldActionPerformed
 
+    private void ScheduleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScheduleTableMouseClicked
+        // TODO add your handling code here:
+        int row = ScheduleTable.rowAtPoint(evt.getPoint());
+
+        if (row >= 0) {
+            for (int column = 0; column < ScheduleTable.getColumnCount(); column++) {
+                Object value = ScheduleTable.getValueAt(row, column);
+                switch (column) {
+                    case 0:
+                        // Update trainScheduleIDLabel with the value of the first column
+                        trainScheduleIDLabel.setText(value.toString());
+                        trainScheduleID = value.toString();
+                        break;
+                    case 1:
+                        // Update trainScheduleIDLabel with the value of the first column
+                        trainNumberTextField.setText(value.toString());
+                        originalTrainNumber = value.toString();
+                        break;
+                    case 2:
+                        // Update departureTimeTextField with the value of the second column
+                        departureTimeTextField.setText(value.toString());
+                        originalDepartureTime = value.toString();
+                        break;
+                    case 3:
+                        // Update arrivalTimeTextField with the value of the third column
+                        arrivalTimeTextField.setText(value.toString());
+                        originalArrivalTime = value.toString();
+                        break;
+                    case 4:
+                        // Update departureLocationTextField with the value of the fourth column
+                        departureLocationTextField.setText(value.toString());
+                        originalDepartureLocation = value.toString();
+                        break;
+                    case 5:
+                        // Update arrivalLocationTextField with the value of the fifth column
+                        arrivalLocationTextField.setText(value.toString());
+                        originalArrivalLocation = value.toString();
+                        break;
+                    case 6:
+                        // Update statusTextField with the value of the sixth column
+                        statusTextField.setText(value.toString());
+                        originalStatus = value.toString();
+                        break;
+                    default:
+                        // Handle additional columns if needed
+                        break;
+                }
+            }
+        }
+//        System.out.println(trainScheduleID);
+//        System.out.println(originalTrainNumber);
+//        System.out.println(originalDepartureTime);
+//        System.out.println(originalArrivalTime);
+//        System.out.println(originalDepartureLocation);
+//        System.out.println(originalArrivalLocation);
+//        System.out.println(originalStatus);
+    }//GEN-LAST:event_ScheduleTableMouseClicked
+
+    private void makeChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeChangesButtonActionPerformed
+        // TODO add your handling code here:
+//        System.out.println();
+//        System.out.println(trainNumberTextField.getText());
+//        System.out.println(departureTimeTextField.getText());
+//        System.out.println(arrivalTimeTextField.getText());
+//        System.out.println(departureLocationTextField.getText());
+//        System.out.println(arrivalLocationTextField.getText());
+//        System.out.println(statusTextField.getText());
+        
+        
+        
+        if(!trainNumberTextField.getText().equals(originalTrainNumber) || !departureTimeTextField.getText().equals(originalDepartureTime) ||
+                !arrivalTimeTextField.getText().equals(originalArrivalTime) || !departureLocationTextField.getText().equals(originalDepartureLocation)||
+                !arrivalLocationTextField.getText().equals(originalArrivalLocation) || !statusTextField.getText().equals(originalStatus)){
+            changesMade = true;
+        }
+        
+        if(changesMade){
+            String[] newchanges= {
+                trainScheduleID, trainNumberTextField.getText(), departureTimeTextField.getText(),
+                arrivalTimeTextField.getText(), departureLocationTextField.getText(), arrivalLocationTextField.getText(),
+                statusTextField.getText()
+            };
+            Admin newChanges = new Admin(newchanges);
+            JOptionPane.showMessageDialog(null, "Train Schedule has been successfully changed.");
+            GUI_AdminMainMenu GUI_adminMainMenu = new GUI_AdminMainMenu();
+            GUI_adminMainMenu.setVisible(true);
+            dispose();
+        } else{
+            JOptionPane.showMessageDialog(null, "No changes are made.");
+        }   
+        
+        
+    }//GEN-LAST:event_makeChangesButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        GUI_AdminMainMenu adminMainMenu_gui = new GUI_AdminMainMenu();
+        adminMainMenu_gui.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    
+    public void displayTable(){
+        // read dataline from file
+        DefaultTableModel model = (DefaultTableModel) ScheduleTable.getModel();
+        FileManager getrow = new FileManager("/Assets/trainschedules.txt");
+        ArrayList<String[]> rows =  getrow.saveTo2DArrayList();
+        
+        for(String[] row: rows){
+            model.addRow(row);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI_modifyTrainSchedule().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(GUI_modifyTrainSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GUI_modifyTrainSchedule().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ScheduleTable;
     private javax.swing.JTextField arrivalLocationTextField;
     private javax.swing.JTextField arrivalTimeTextField;
+    private javax.swing.JButton backButton;
     private javax.swing.JTextField departureLocationTextField;
     private javax.swing.JTextField departureTimeTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -318,6 +459,7 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton makeChangesButton;
     private javax.swing.JTextField statusTextField;
     private javax.swing.JTextField trainNumberTextField;
     private javax.swing.JLabel trainScheduleIDLabel;
