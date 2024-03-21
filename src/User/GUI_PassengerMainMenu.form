@@ -200,6 +200,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="4) My Personal Information"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showPersonalInformationLabelMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="searchTrainScheduleLabel1">
               <Properties>

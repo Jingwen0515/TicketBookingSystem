@@ -125,14 +125,21 @@ public class GUI_showAllTrainSchedule extends javax.swing.JFrame {
 
     
     public void displayTable(){
-        // read dataline from file
+        // Read data from file and populate the table model
         DefaultTableModel model = (DefaultTableModel) ScheduleTable.getModel();
-        FileManager getrow = new FileManager("/Assets/trainschedules.txt");
-        ArrayList<String[]> rows =  getrow.saveTo2DArrayList();
-        
-        for(String[] row: rows){
+        FileManager fileManager = new FileManager("src/Assets/trainschedules.txt");
+        ArrayList<String[]> rows = fileManager.saveTo2DArrayList();
+
+        // Clear the existing rows from the table
+        model.setRowCount(0);
+
+        // Add the new rows to the table model
+        for (String[] row : rows) {
             model.addRow(row);
         }
+
+        // Notify the GUI to redraw the table with the updated data
+        model.fireTableDataChanged();
     }
     
     /**

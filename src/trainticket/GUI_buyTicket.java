@@ -203,7 +203,7 @@ public class GUI_buyTicket extends javax.swing.JFrame {
     public void displayTrainScheduleTable(){
         // read dataline from file
         DefaultTableModel model = (DefaultTableModel) trainScheduleTable.getModel();
-        FileManager getrow = new FileManager("/Assets/trainschedules.txt");
+        FileManager getrow = new FileManager("src/Assets/trainschedules.txt");
         ArrayList<String> rows =  getrow.readFile();
 
         // Separate line into data
@@ -220,7 +220,7 @@ public class GUI_buyTicket extends javax.swing.JFrame {
     }
     
     public static String[] searchForRespectiveTrain(String trainScheduleNumber){
-       FileManager file = new FileManager("/Assets/trainschedules.txt");
+       FileManager file = new FileManager("src/Assets/trainschedules.txt");
         ArrayList<String[]> allTrainSchedule = file.saveTo2DArrayList();
         String[] savedData = new String[6];
         boolean isFound = false;

@@ -33,7 +33,7 @@ public class Booking {
     } 
     
     public String searchForLatestBookingID(){
-        FileManager file = new FileManager("/Assets/Bookings.txt");
+        FileManager file = new FileManager("src/Assets/Bookings.txt");
         ArrayList<String> BData = file.readFile();
         int newNo=0;
         if(BData.size() ==0){
@@ -45,7 +45,7 @@ public class Booking {
             String lastBID = data[0];
             newNo = Integer.parseInt(lastBID.substring(2))+1;
         }
-        String newBID = "BO" + String.format("%03d", newNo);
+        String newBID = "B0" + String.format("%03d", newNo);
         return newBID;
     }
     

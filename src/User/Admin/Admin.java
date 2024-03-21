@@ -33,7 +33,7 @@ public class Admin extends User{
     }
     
     public String searchForLatestTrainScheduleID(){
-        FileManager file = new FileManager("/Assets/trainschedules.txt");
+        FileManager file = new FileManager("src/Assets/trainschedules.txt");
         ArrayList<String> BData = file.readFile();
         int newNo=0;
         if(BData.size() ==0){

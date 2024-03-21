@@ -396,7 +396,7 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
     public void displayTable(){
         // read dataline from file
         DefaultTableModel model = (DefaultTableModel) ScheduleTable.getModel();
-        FileManager getrow = new FileManager("/Assets/trainschedules.txt");
+        FileManager getrow = new FileManager("src/Assets/trainschedules.txt");
         ArrayList<String[]> rows =  getrow.saveTo2DArrayList();
         
         for(String[] row: rows){

@@ -110,6 +110,11 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
 
         showPersonalInformationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         showPersonalInformationLabel.setText("4) My Personal Information");
+        showPersonalInformationLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showPersonalInformationLabelMouseClicked(evt);
+            }
+        });
 
         searchTrainScheduleLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         searchTrainScheduleLabel1.setText("2) Search Train Schedule with Source and Destination");
@@ -197,6 +202,13 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         showAllBookings.setVisible(true);
         dispose();
     }//GEN-LAST:event_showAllBookingLabelMouseClicked
+
+    private void showPersonalInformationLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPersonalInformationLabelMouseClicked
+        // TODO add your handling code here:
+        GUI_PersonalInformation personalInfo = new GUI_PersonalInformation(current_passenger);
+        personalInfo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_showPersonalInformationLabelMouseClicked
 
     /**
      * @param args the command line arguments

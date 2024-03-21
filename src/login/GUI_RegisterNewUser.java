@@ -4,16 +4,19 @@
  */
 package login;
 
+import DBM.FileManager;
 import User.GUI_PassengerMainMenu;
 import User.User;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -279,65 +282,92 @@ public class GUI_RegisterNewUser extends javax.swing.JFrame {
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         boolean usernameIsTaken = false;
         boolean repeatPasswordSimilar = false;
-        String newUsername = newUserName.getText(); // Assuming newUserName is a JTextField
+        String newUsername = newUserName.getText();
+        String passwordString1 = new String(newPassword.getPassword());
+        String passwordString2 = new String(newReenterPassword.getPassword());
+        FileManager fileManager = new FileManager("src/Assets/userdata.txt");
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/Assets/userdata.txt")))) {
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Split the line by commas
-                String[] parts = line.split(",");
-                if (parts.length >= 2 && parts[0].equals(newUsername)) {
-                    JOptionPane.showMessageDialog(null, "UserID: " + newUsername + " is taken. Please choose another username.");
-                    usernameIsTaken = true;
-                    break; // No need to continue checking
-                }
+        ArrayList<String[]> userData = fileManager.saveTo2DArrayList();
+        
+        for(int i=0;i<userData.size();i++){
+            if(userData.get(i)[1].equals(newUsername)){
+                JOptionPane.showMessageDialog(null, "UserID: " + newUsername + " is taken. Please choose another username.");
+                usernameIsTaken = true;
+                break;
             }
-            
-            char[] password1 = newPassword.getPassword();
-
-            // Get the password from the second field as a char array
-            char[] password2 = newReenterPassword.getPassword();
-
-            // Convert the char arrays to strings
-            String passwordString1 = new String(password1);
-            String passwordString2 = new String(password2);
-
-            // Check if the passwords match
-            if (passwordString1.equals(passwordString2)) {
-                repeatPasswordSimilar = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Password re-entered not match.");
-            }
-            
-           
-            // Close the reader before opening the file for appending
-            reader.close();
-            
-            
-            if (!usernameIsTaken && repeatPasswordSimilar) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Assets/userdata.txt", true))) {
-                    // Append each string in the array as a new line in the file
-                    String userData = newUserName.getText() + "," + new String(newPassword.getPassword()) + "," + newEmail.getText() + ",user," + newFirstName.getText() + "," + newLastName.getText() + "\n";
-                    writer.write(userData);
-                    JOptionPane.showMessageDialog(null, "Account Successfully Created!");
-                    GUI_Login_Application login = new GUI_Login_Application();
-                    login.setVisible(true);
-                    dispose();
-                } 
-                catch (IOException e) {
-                    e.printStackTrace(); // Handle or log the exception
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle or log the exception
         }
+        
+        if (passwordString1.equals(passwordString2)) {
+                repeatPasswordSimilar = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Password re-entered does not match.");
+        }
+        
+        if(!usernameIsTaken && repeatPasswordSimilar){
+            String newPassengerID = searchForLatestPassengerID();
+            String[] newUserData = {newPassengerID,newUsername,passwordString1,newEmail.getText(),"passenger",newFirstName.getText(),newLastName.getText()};
+            fileManager.addToFile(newUserData);
+            JOptionPane.showMessageDialog(null, "Account Successfully Created!");
+            GUI_Login_Application login = new GUI_Login_Application();
+            login.setVisible(true);
+            dispose();
+        }
+        
+//        try (BufferedReader reader = new BufferedReader(new FileReader("src/Assets/userdata.txt"))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                String[] parts = line.split(",");
+//                if (parts.length >= 2 && parts[0].equals(newUsername)) {
+//                    JOptionPane.showMessageDialog(null, "UserID: " + newUsername + " is taken. Please choose another username.");
+//                    usernameIsTaken = true;
+//                    break;
+//                }
+//            }
+//
+//            if (passwordString1.equals(passwordString2)) {
+//                repeatPasswordSimilar = true;
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Password re-entered does not match.");
+//            }
+//
+//            if (!usernameIsTaken && repeatPasswordSimilar) {
+//                try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Assets/userdata.txt", true))) {
+//                    String userData = newUsername + "," + passwordString1 + "," + newEmail.getText() + ",user," + newFirstName.getText() + "," + newLastName.getText() + "\n";
+//                    writer.write(userData);
+//                    JOptionPane.showMessageDialog(null, "Account Successfully Created!");
+//                    GUI_Login_Application login = new GUI_Login_Application();
+//                    login.setVisible(true);
+//                    dispose();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void newEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newEmailActionPerformed
 
+    
+    public String searchForLatestPassengerID(){
+        FileManager file = new FileManager("src/Assets/userdata.txt");
+        ArrayList<String> BData = file.readFile();
+        int newNo=0;
+        if(BData.size() ==0){
+            newNo=1;
+        }
+        else{
+            String lastRow = BData.get( BData.size()-1);
+            String[] data = lastRow.trim().split("\\|");
+            String lastBID = data[0];
+            newNo = Integer.parseInt(lastBID.substring(2))+1;
+        }
+        String newBID = "P" + String.format("%03d", newNo);
+        return newBID;
+    }
     /**
      * @param args the command line arguments
      */

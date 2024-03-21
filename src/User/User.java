@@ -40,7 +40,7 @@ public class User {
     }
     
     public static String[] validateLogin(String targetUsername,String targetPassword){
-        FileManager file = new FileManager("/Assets/userdata.txt");
+        FileManager file = new FileManager("src/Assets/userdata.txt");
         ArrayList<String[]> userData = file.saveTo2DArrayList();
         String[] savedData = new String[8];
         boolean isFound = false;

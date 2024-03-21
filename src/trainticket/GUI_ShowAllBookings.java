@@ -5,6 +5,7 @@
 package trainticket;
 
 import DBM.FileManager;
+import User.GUI_PassengerMainMenu;
 import User.Passenger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,12 +18,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUI_ShowAllBookings extends javax.swing.JFrame {
     private String currentPassengerID;
+    private Passenger current_passenger;
     /**
      * Creates new form GUI_ShowAllBookings
      */
     public GUI_ShowAllBookings(Passenger currentPassenger) {
         initComponents();
         this.currentPassengerID = currentPassenger.getPassengerID();
+        this.current_passenger = currentPassenger;
         displayBookingTable();
     }
 
@@ -121,6 +124,11 @@ public class GUI_ShowAllBookings extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,11 +160,18 @@ public class GUI_ShowAllBookings extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        GUI_PassengerMainMenu passengerMainMenu = new GUI_PassengerMainMenu(current_passenger);
+        passengerMainMenu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+
     
 public void displayBookingTable(){
     DefaultTableModel model = (DefaultTableModel) bookingsTable.getModel();
-    FileManager bookingFile = new FileManager("/Assets/Bookings.txt");
-    FileManager TSFile = new FileManager("/Assets/trainschedules.txt");
+    FileManager bookingFile = new FileManager("src/Assets/Bookings.txt");
+    FileManager TSFile = new FileManager("src/Assets/trainschedules.txt");
 
     ArrayList<String[]> bookingList = bookingFile.saveTo2DArrayList();
     ArrayList<String[]> displayList = new ArrayList<>();
@@ -172,7 +187,7 @@ public void displayBookingTable(){
             newTableData[5] = TSData[3];
             newTableData[6] = TSData[4];
             newTableData[7] = TSData[5];
-            newTableData[8] = bookingList.get(i)[4];
+            newTableData[8] = "RM"+bookingList.get(i)[4];
             displayList.add(newTableData);
         }
         

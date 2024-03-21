@@ -182,7 +182,7 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
 
     private void addScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addScheduleButtonActionPerformed
         // TODO add your handling code here:
-         ArrayList<String[]> previousData = new FileManager("/Assets/trainschedules.txt").saveTo2DArrayList();
+         ArrayList<String[]> previousData = new FileManager("src/Assets/trainschedules.txt").saveTo2DArrayList();
         boolean validInformation = false;
         
         if(!trainNumberTextField.getText().isEmpty()|| !departureTimeTextField.getText().isEmpty()|| !arrivalTimeTextField.getText().isEmpty()||

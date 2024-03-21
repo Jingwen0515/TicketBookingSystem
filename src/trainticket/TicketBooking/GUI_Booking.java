@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import trainticket.GUI_buyTicket;
 import trainticket.Train;
 
 /**
@@ -49,7 +50,7 @@ public class GUI_Booking extends javax.swing.JFrame {
         }
         this.current_passenger = currentPassenger;
         this.buy_ticket = buyTicket;
-        String[] ScheduleData = new FileManager("/Assets/trainschedules.txt").searchByPrimaryKey(buy_ticket.getTrainScheduleNumber());
+        String[] ScheduleData = new FileManager("src/Assets/trainschedules.txt").searchByPrimaryKey(buy_ticket.getTrainScheduleNumber());
         displayScheduleTable(ScheduleData);
         setCheckSeatDisable();
         
@@ -210,6 +211,7 @@ public class GUI_Booking extends javax.swing.JFrame {
         trainScheduleDetailsLabelHeading.setText("Train Schedule Details");
         trainScheduleDetailsLabelHeading.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        ScheduleTable.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         ScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1246,6 +1248,9 @@ public class GUI_Booking extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
+        GUI_buyTicket buyTicket = new GUI_buyTicket(current_passenger);
+        buyTicket.setVisible(true);
+        dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
@@ -1339,7 +1344,7 @@ public class GUI_Booking extends javax.swing.JFrame {
         
     }//GEN-LAST:event_confirmAndPayButtonActionPerformed
     private void setCheckSeatDisable() {
-        FileManager file = new FileManager("/Assets/Bookings.txt");
+        FileManager file = new FileManager("src/Assets/Bookings.txt");
         ArrayList<String[]> bookingData = file.saveTo2DArrayList();
         ArrayList<String[]> selectedTrainScheduleData = new ArrayList<>();
         // Get the Specific Train Schedule

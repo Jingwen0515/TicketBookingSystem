@@ -181,7 +181,7 @@ public class FileManager {
         }
 
         try {
-            FileWriter file = new FileWriter(fileName);
+            FileWriter file = new FileWriter("src/Assets/trainschedules.txt");
             BufferedWriter writer = new BufferedWriter(file);
             
             for (String[] data : dataLines) {
@@ -199,8 +199,8 @@ public class FileManager {
     public ArrayList<String> readFile() {
         ArrayList<String> object = new ArrayList<String>();
         try{
-//            FileReader file = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName)));
+            FileReader file = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(file);
             String line;
             while ((line = reader.readLine()) != null){
                 object.add(line);
