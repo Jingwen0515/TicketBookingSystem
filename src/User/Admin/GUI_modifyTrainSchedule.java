@@ -5,6 +5,7 @@
 package User.admin;
 
 import DBM.FileManager;
+import DBM.InputValidation;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -358,7 +359,46 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
 //        System.out.println(departureLocationTextField.getText());
 //        System.out.println(arrivalLocationTextField.getText());
 //        System.out.println(statusTextField.getText());
+        boolean validTrainNo = false;
+        boolean validTime = false;
+        boolean validLocation = false;
+        boolean validStatus = false;
         
+        // Train Number
+        if(InputValidation.isValidTrainNo(trainNumberTextField.getText())){
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Enter the correct TrainNo");
+        }
+        // Departure time and arrival time
+        if(InputValidation.isValidTime(departureTimeTextField.getText()) && InputValidation.isValidTime(arrivalTimeTextField.getText())){
+            if(InputValidation.TimeCompare(departureTimeTextField.getText(), arrivalTimeTextField.getText())){
+                validTime = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Arrival Time cannot be eariler than Departure Time.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Invalid Time Format");
+        }
+        
+        // Departure Location and Arrical Location
+        if(!departureLocationTextField.getText().equals(arrivalLocationTextField.getText())){
+            validLocation = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Departure Location cannot same to the Arrival Location");
+        }
+        
+        // status
+        if(statusTextField.getText().equals("Pending") || statusTextField.getText().equals("Pending")){
+            validStatus = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Status only 'Pending' or 'Done' ");
+        }
         
         
         if(!trainNumberTextField.getText().equals(originalTrainNumber) || !departureTimeTextField.getText().equals(originalDepartureTime) ||
@@ -367,7 +407,7 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
             changesMade = true;
         }
         
-        if(changesMade){
+        if(changesMade && validTrainNo && validTime && validLocation && validStatus){
             String[] newchanges= {
                 trainScheduleID, trainNumberTextField.getText(), departureTimeTextField.getText(),
                 arrivalTimeTextField.getText(), departureLocationTextField.getText(), arrivalLocationTextField.getText(),

@@ -41,6 +41,32 @@ public class InputValidation {
         return false;
     }
     
+    public static boolean isValidTrainNo(String trainNo){
+        String pattern = "T\\d{3}";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(trainNo);
+        return matcher.matches();
+    }
+    
+    public static boolean isValidTime(String time){
+        String pattern = "([01]?[0-9]|2[0-3])[0-5][0-9]";
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(time);
+        return matcher.matches();
+    }
+    
+    public static boolean TimeCompare(String startTime, String endTime){
+        int startTimeMin = convertToMinutes(startTime);
+        int endTimeMin = convertToMinutes(endTime);
+        return startTimeMin < endTimeMin;
+    }
+    
+    private static int convertToMinutes(String time) {
+        int hours = Integer.parseInt(time.substring(0, 2));
+        int minutes = Integer.parseInt(time.substring(2));
+        return hours * 60 + minutes;
+    }
+    
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(emailRegex);

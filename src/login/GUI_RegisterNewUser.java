@@ -5,6 +5,7 @@
 package login;
 
 import DBM.FileManager;
+import DBM.InputValidation;
 import User.GUI_PassengerMainMenu;
 import User.User;
 import java.io.BufferedReader;
@@ -282,6 +283,8 @@ public class GUI_RegisterNewUser extends javax.swing.JFrame {
     private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
         boolean usernameIsTaken = false;
         boolean repeatPasswordSimilar = false;
+        boolean validEmail = false;
+        boolean validPhoneNumber = false;
         String newUsername = newUserName.getText();
         String passwordString1 = new String(newPassword.getPassword());
         String passwordString2 = new String(newReenterPassword.getPassword());
@@ -303,7 +306,19 @@ public class GUI_RegisterNewUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Password re-entered does not match.");
         }
         
-        if(!usernameIsTaken && repeatPasswordSimilar){
+        if(InputValidation.isValidEmail(newEmail.getText())){
+            validEmail = true;
+        }else{
+            JOptionPane.showMessageDialog(null,"Invalid Email");
+        }
+        
+        if(InputValidation.isValidPhoneNumber(newPhoneNumber.getText())){
+            validPhoneNumber = true;
+        }else{
+            JOptionPane.showMessageDialog(null,"Invalid Phone Number");
+        }
+        
+        if(!usernameIsTaken && repeatPasswordSimilar && validEmail && validPhoneNumber ){
             String newPassengerID = searchForLatestPassengerID();
             String[] newUserData = {newPassengerID,newUsername,passwordString1,newEmail.getText(),"passenger",newFirstName.getText(),newLastName.getText()};
             fileManager.addToFile(newUserData);
