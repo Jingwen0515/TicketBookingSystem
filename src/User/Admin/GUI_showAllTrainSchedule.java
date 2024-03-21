@@ -52,11 +52,11 @@ public class GUI_showAllTrainSchedule extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ScheduleID", "Train Number", "Departure Location", "Arrival Location", "Departure Time", "Arrival Time"
+                "ScheduleID", "Train Number", "Departure Location", "Arrival Location", "Departure Time", "Arrival Time", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

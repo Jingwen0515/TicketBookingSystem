@@ -4,6 +4,7 @@
  */
 package User.admin;
 
+import login.GUI_Login_Application;
 import trainticket.GUI_buyTicket;
 import trainticket.GUI_searchTrainSchedule;
 
@@ -32,7 +33,7 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
         headerPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        LogOut = new javax.swing.JLabel();
+        logoutLabel = new javax.swing.JLabel();
         actionPanel = new javax.swing.JPanel();
         showAllTrainScheduleLabel = new javax.swing.JLabel();
         modifyTrainScheduleLabel = new javax.swing.JLabel();
@@ -46,8 +47,13 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel4.setText("Below shows all actions that you can perform. Please choose one to continue.");
 
-        LogOut.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        LogOut.setText("Logout");
+        logoutLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        logoutLabel.setText("Logout");
+        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -58,7 +64,7 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LogOut))
+                        .addComponent(logoutLabel))
                     .addGroup(headerPanelLayout.createSequentialGroup()
                         .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -70,7 +76,7 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LogOut)
+                .addComponent(logoutLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -172,6 +178,13 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_addTrainScheduleLabelMouseClicked
 
+    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        // TODO add your handling code here:
+        GUI_Login_Application login = new GUI_Login_Application();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -208,12 +221,12 @@ public class GUI_AdminMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LogOut;
     private javax.swing.JPanel actionPanel;
     private javax.swing.JLabel addTrainScheduleLabel;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel logoutLabel;
     private javax.swing.JLabel modifyTrainScheduleLabel;
     private javax.swing.JLabel showAllTrainScheduleLabel;
     // End of variables declaration//GEN-END:variables

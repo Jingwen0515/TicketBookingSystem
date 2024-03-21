@@ -5,6 +5,9 @@
 package User;
 
 import DBM.FileManager;
+import User.admin.Admin;
+import User.admin.GUI_AdminMainMenu;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,6 +15,10 @@ import DBM.FileManager;
  */
 public class GUI_PersonalInformation extends javax.swing.JFrame {
     private Passenger currentPassenger;
+    private String originalPassword;
+    private String originalEmail;
+    private String originalFirstName;
+    private String originalLastName;
     /**
      * Creates new form PersonalInformation
      */
@@ -52,8 +59,8 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
         lastnameTextField = new javax.swing.JTextField();
         idTextField = new javax.swing.JTextField();
         showPasswordCheckbox = new javax.swing.JCheckBox();
-        backButton = new javax.swing.JButton();
         passwordTextField = new javax.swing.JPasswordField();
+        backButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,28 +105,23 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
             }
         });
 
-        backButton.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
+        passwordTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+
+        backButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        backButton1.setText("Back");
+        backButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
+                backButton1ActionPerformed(evt);
             }
         });
-
-        passwordTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -145,6 +147,15 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
                                 .addComponent(showPasswordCheckbox))
                             .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(213, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(backButton1)
+                    .addContainerGap(447, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,9 +188,12 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(lastnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(backButton)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(324, Short.MAX_VALUE)
+                    .addComponent(backButton1)
+                    .addGap(33, 33, 33)))
         );
 
         pack();
@@ -194,12 +208,12 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_showPasswordCheckboxActionPerformed
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void backButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButton1ActionPerformed
         // TODO add your handling code here:
         GUI_PassengerMainMenu passengerMainMenu = new GUI_PassengerMainMenu(currentPassenger);
         passengerMainMenu.setVisible(true);
         dispose();
-    }//GEN-LAST:event_backButtonActionPerformed
+    }//GEN-LAST:event_backButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,7 +252,7 @@ public class GUI_PersonalInformation extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
+    private javax.swing.JButton backButton1;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField firstnameTextField;
     private javax.swing.JLabel headerLabel;

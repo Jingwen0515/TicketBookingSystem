@@ -2,6 +2,7 @@ package User;
 
 
 import javax.swing.JOptionPane;
+import login.GUI_Login_Application;
 import trainticket.GUI_searchTrainSchedule;
 import trainticket.GUI_buyTicket;
 import trainticket.GUI_ShowAllBookings;
@@ -39,7 +40,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         HeaderPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        LogOut = new javax.swing.JLabel();
+        logoutLabel = new javax.swing.JLabel();
         InfoPanel = new javax.swing.JPanel();
         showTrainScheduleLabel = new javax.swing.JLabel();
         showAllBookingLabel = new javax.swing.JLabel();
@@ -60,8 +61,13 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel4.setText("Below shows all actions that you can perform. Please choose one to continue.");
 
-        LogOut.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        LogOut.setText("Logout");
+        logoutLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        logoutLabel.setText("Logout");
+        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout HeaderPanelLayout = new javax.swing.GroupLayout(HeaderPanel);
         HeaderPanel.setLayout(HeaderPanelLayout);
@@ -75,14 +81,14 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
                 .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LogOut)
+                .addComponent(logoutLabel)
                 .addContainerGap())
         );
         HeaderPanelLayout.setVerticalGroup(
             HeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LogOut)
+                .addComponent(logoutLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -210,6 +216,13 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_showPersonalInformationLabelMouseClicked
 
+    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        // TODO add your handling code here:
+        GUI_Login_Application login = new GUI_Login_Application();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -263,11 +276,11 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JPanel InfoPanel;
-    private javax.swing.JLabel LogOut;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel logoutLabel;
     private javax.swing.JLabel searchTrainScheduleLabel1;
     private javax.swing.JLabel showAllBookingLabel;
     private javax.swing.JLabel showPersonalInformationLabel;

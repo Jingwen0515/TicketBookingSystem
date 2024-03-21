@@ -27,6 +27,7 @@ public class GUI_ShowAllBookings extends javax.swing.JFrame {
         this.currentPassengerID = currentPassenger.getPassengerID();
         this.current_passenger = currentPassenger;
         displayBookingTable();
+        usernameTextField.setText(currentPassengerID);
     }
 
     /**
@@ -51,7 +52,7 @@ public class GUI_ShowAllBookings extends javax.swing.JFrame {
 
         usernameLabel.setBackground(new java.awt.Color(246, 246, 246));
         usernameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        usernameLabel.setText("UserName: ");
+        usernameLabel.setText("Passenger ID:");
         usernameLabel.setBorder(null);
 
         usernameTextField.setBackground(new java.awt.Color(246, 246, 246));
