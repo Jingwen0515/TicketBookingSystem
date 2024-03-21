@@ -3,7 +3,8 @@ package User;
 
 import javax.swing.JOptionPane;
 import trainticket.GUI_searchTrainSchedule;
-import trainticket.GUI_showTrainSchedule;
+import trainticket.GUI_buyTicket;
+import trainticket.GUI_ShowAllBookings;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -101,6 +102,11 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
 
         showAllBookingLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         showAllBookingLabel.setText("3) Show All Bookings");
+        showAllBookingLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showAllBookingLabelMouseClicked(evt);
+            }
+        });
 
         showPersonalInformationLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
         showPersonalInformationLabel.setText("4) My Personal Information");
@@ -173,7 +179,7 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
 
     private void showTrainScheduleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showTrainScheduleLabelMouseClicked
         // TODO add your handling code here:
-        GUI_showTrainSchedule gui_showTrainSchedule = new GUI_showTrainSchedule(current_passenger);
+        GUI_buyTicket gui_showTrainSchedule = new GUI_buyTicket(current_passenger);
         gui_showTrainSchedule.setVisible(true);
         dispose();
     }//GEN-LAST:event_showTrainScheduleLabelMouseClicked
@@ -184,6 +190,13 @@ public class GUI_PassengerMainMenu extends javax.swing.JFrame {
         gui_searchTrainSchedule.setVisible(true);
         dispose();
     }//GEN-LAST:event_searchTrainScheduleLabel1MouseClicked
+
+    private void showAllBookingLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showAllBookingLabelMouseClicked
+        // TODO add your handling code here:
+        GUI_ShowAllBookings showAllBookings = new GUI_ShowAllBookings(current_passenger);
+        showAllBookings.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_showAllBookingLabelMouseClicked
 
     /**
      * @param args the command line arguments

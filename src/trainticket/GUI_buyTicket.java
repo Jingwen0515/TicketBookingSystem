@@ -16,14 +16,14 @@ import trainticket.TicketBooking.GUI_Booking;
  *
  * @author jingwen
  */
-public class GUI_showTrainSchedule extends javax.swing.JFrame {
+public class GUI_buyTicket extends javax.swing.JFrame {
 
     /**
      * Creates new form GUI_showTrainSchedule
      */
     private Passenger current_passenger;
     
-    public GUI_showTrainSchedule(Passenger currentPassenger) {
+    public GUI_buyTicket(Passenger currentPassenger) {
         this.current_passenger = currentPassenger;
         initComponents();
         displayTrainScheduleTable();
@@ -205,14 +205,16 @@ public class GUI_showTrainSchedule extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) trainScheduleTable.getModel();
         FileManager getrow = new FileManager("/Assets/trainschedules.txt");
         ArrayList<String> rows =  getrow.readFile();
-        
+
         // Separate line into data
         // ArrayList with String
         for(int i=0 ; i< rows.size();i++){
             String line = rows.get(i);
             // System.out.println(line);
             String[] data = line.split("\\|");
-            model.addRow(data);
+            if(data[6].equals("Pending")){
+                model.addRow(data);
+            }
         }
         System.out.println(rows.get(0));
     }

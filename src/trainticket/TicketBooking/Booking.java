@@ -24,24 +24,13 @@ public class Booking {
     private Train instance;
     private String seatsSelectedLabel;
     
-    public Booking(Train bookedTrain, Passenger currentPassenger, JLabel seatsSelectedLabel){
+    public Booking(Train bookedTrain, Passenger currentPassenger, JLabel seatsSelectedLabel, double totalCost){
         this.instance = bookedTrain;
         this.inChargePassengerID = currentPassenger.getPassengerID();
         this.seatsSelectedLabel = seatsSelectedLabel.getText();
+        this.totalCost = totalCost;
         createBookings();
-    }
-    
-//    public static int searchForLatestbookingID(){
-//        FileManager file = new FileManager("/Assets/Bookings.txt");
-//        ArrayList<String[]> bookings = file.saveTo2DArrayList();
-//        int count = 0;
-//
-//        for(String[] data : bookings){
-//            count++;
-//        }
-//        count++;
-//        return count;
-//    }
+    } 
     
     public String searchForLatestBookingID(){
         FileManager file = new FileManager("/Assets/Bookings.txt");
@@ -62,8 +51,9 @@ public class Booking {
     
     public void createBookings(){
         String bookingID = searchForLatestBookingID();
-        String[] bookingDetails = { bookingID, inChargePassengerID, instance.trainScheduleNumber, seatsSelectedLabel
-        };
+        //Convert double to String
+        String stringTotalCost = Double.toString(this.totalCost);
+        String[] bookingDetails = { bookingID, inChargePassengerID, instance.trainScheduleNumber, seatsSelectedLabel, stringTotalCost};
         
         FileManager fileManager = new FileManager("src/Assets/Bookings.txt");
         fileManager.addToFile(bookingDetails);

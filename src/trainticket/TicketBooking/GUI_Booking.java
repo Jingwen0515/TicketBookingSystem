@@ -5,11 +5,13 @@
 package trainticket.TicketBooking;
 
 import DBM.FileManager;
+import User.GUI_PassengerMainMenu;
 import User.Passenger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +28,7 @@ public class GUI_Booking extends javax.swing.JFrame {
     private Train buy_ticket;
     private ArrayList<String> selectedSeats = new ArrayList<>();
     private boolean seatsSelected = false;
+    private Map<String, JCheckBox> seatCheckBoxMap = new HashMap<>();
     /**
      * Creates new form GUI_Booking
      */
@@ -41,10 +44,14 @@ public class GUI_Booking extends javax.swing.JFrame {
             G01, G02, G03, G04, G05, G06,
             H01, H02, H03, H04, H05, H06
         };
+        for(int i = 0; i < seatCheckBoxes.length; i++){
+            seatCheckBoxMap.put(seatCheckBoxes[i].getName(),seatCheckBoxes[i]);
+        }
         this.current_passenger = currentPassenger;
         this.buy_ticket = buyTicket;
         String[] ScheduleData = new FileManager("/Assets/trainschedules.txt").searchByPrimaryKey(buy_ticket.getTrainScheduleNumber());
         displayScheduleTable(ScheduleData);
+        setCheckSeatDisable();
         
         for (JCheckBox checkBox : seatCheckBoxes) {
             checkBox.addActionListener(new ActionListener() {
@@ -205,10 +212,7 @@ public class GUI_Booking extends javax.swing.JFrame {
 
         ScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ScheduleID", "Train Number", "Departure Time", "Arrival Time", "Departure Location", "Arrival Location"
@@ -1324,11 +1328,42 @@ public class GUI_Booking extends javax.swing.JFrame {
         }
         
         else{
-            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel);
+            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel, totalFee);
             JOptionPane.showMessageDialog(null,"You have successfully booked your tickets."
                     + " Please go to the 'Show My Bookings' to view your ticket");
+            GUI_PassengerMainMenu passengerMainMenu = new GUI_PassengerMainMenu(current_passenger);
+            passengerMainMenu.setVisible(true);
+            dispose();
         }
+        
+        
     }//GEN-LAST:event_confirmAndPayButtonActionPerformed
+    private void setCheckSeatDisable() {
+        FileManager file = new FileManager("/Assets/Bookings.txt");
+        ArrayList<String[]> bookingData = file.saveTo2DArrayList();
+        ArrayList<String[]> selectedTrainScheduleData = new ArrayList<>();
+        // Get the Specific Train Schedule
+        for (String[] data : bookingData) {
+            if (data[2].equals(buy_ticket.getTrainScheduleNumber())) {
+                selectedTrainScheduleData.add(data);
+            }
+        }
+
+        // Disable checkboxes based on seat identifiers
+        for (String[] trainScheduleArray : selectedTrainScheduleData) {
+            String seatLine = trainScheduleArray[3];
+            String[] seatArray = seatLine.split(":");
+            for (String seat : seatArray) {
+                JCheckBox checkBox = seatCheckBoxMap.get(seat);
+                if (checkBox != null) {
+                    checkBox.setEnabled(false);
+                } else {
+                    System.out.println("Invalid seat identifier: " + seat);
+                }
+            }
+        }
+    }
+    
     
       
     public void displayScheduleTable(String[] scheduleData){
@@ -1386,11 +1421,13 @@ public class GUI_Booking extends javax.swing.JFrame {
 
         if (checkbox.isSelected()) {
             selectedSeats.add(seatName);
+            
         } else {
             selectedSeats.remove(seatName); // Remove the seat information if the checkbox is deselected
         }
         String Text = String.join(":",selectedSeats);
         seatsSelectedLabel.setText(Text); // Set the updated text to the label
+        seatsSelected = !seatsSelectedLabel.getText().isEmpty();
     }
 
     

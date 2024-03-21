@@ -127,6 +127,71 @@ public class FileManager {
         }
     }
     
+    public void editFileDataV1(String[] targetLine, int dataIndexToChange, String newData) {
+        ArrayList<String[]> dataLines = this.saveTo2DArrayList();
+        for (int i = 0; i < dataLines.size(); i++) {
+            if (Arrays.equals(dataLines.get(i), targetLine)) {
+                if (dataIndexToChange >= 0 && dataIndexToChange < targetLine.length) {
+                    dataLines.get(i)[dataIndexToChange] = newData;
+                    break; // No need to continue looping if the target line is found and data changed
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid data index");
+                    return; // Exit method if the data index is invalid
+                }
+            }
+        }
+
+        try {
+            FileWriter file = new FileWriter(fileName);
+            BufferedWriter writer = new BufferedWriter(file);
+            for (String[] data : dataLines) {
+                String line = String.join("|", data);
+                writer.write(line + "\n");
+            }
+            writer.flush();
+            writer.close(); // Close the writer after writing data
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    public void editFileDataV2(String primaryKey, int dataIndexToChange, String newData) {
+        ArrayList<String[]> dataLines = this.saveTo2DArrayList();
+        boolean found = false;
+        
+        for (int i = 0; i < dataLines.size(); i++) {
+            String[] currentLine = dataLines.get(i);
+            if (currentLine.length > 0 && currentLine[0].equals(primaryKey)) {
+                if (dataIndexToChange >= 0 && dataIndexToChange < currentLine.length) {
+                    currentLine[dataIndexToChange] = newData;
+                    found = true;
+                    break; // No need to continue looping if the primary key is found and data changed
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid data index");
+                    return; // Exit method if the data index is invalid
+                }
+            }
+        }
+
+        if (!found) {
+            JOptionPane.showMessageDialog(null, "Primary key not found");
+            return; // Exit method if primary key is not found
+        }
+
+        try {
+            FileWriter file = new FileWriter(fileName);
+            BufferedWriter writer = new BufferedWriter(file);
+            for (String[] data : dataLines) {
+                String line = String.join("|", data);
+                writer.write(line + "\n");
+            }
+            writer.flush();
+            writer.close(); // Close the writer after writing data
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
     public ArrayList<String> readFile() {
         ArrayList<String> object = new ArrayList<String>();
         try{

@@ -5,7 +5,7 @@
 package trainticket;
 
 import DBM.FileManager;
-import User.Admin;
+import User.Admin.Admin;
 import User.Passenger;
 import java.util.ArrayList;
 import java.util.HashMap;
