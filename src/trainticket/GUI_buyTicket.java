@@ -89,6 +89,11 @@ public class GUI_buyTicket extends javax.swing.JFrame {
             }
         });
         trainScheduleTable.setRowHeight(24);
+        trainScheduleTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trainScheduleTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(trainScheduleTable);
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
@@ -199,6 +204,17 @@ public class GUI_buyTicket extends javax.swing.JFrame {
             dispose();
         }
     }//GEN-LAST:event_buyTicketButtonActionPerformed
+
+    private void trainScheduleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trainScheduleTableMouseClicked
+        // TODO add your handling code here:
+        int row = trainScheduleTable.rowAtPoint(evt.getPoint());
+
+        if (row >= 0) {
+            Object value = trainScheduleTable.getValueAt(row, 0);
+            // Update trainScheduleIDLabel with the value of the first column
+            trainScheduleIDTextField.setText(value.toString()); 
+        }
+    }//GEN-LAST:event_trainScheduleTableMouseClicked
 
     public void displayTrainScheduleTable(){
         // read dataline from file
