@@ -20,12 +20,12 @@ public class Admin extends User{
     public Admin(String trainNumber, String departureTime, String arrivalTime,
         String departureLocation, String arrivalLocation){
         this.trainSCID = searchForLatestTrainScheduleID();
-//        String trainScheduleID = searchForLatestTrainScheduleID();
         FileManager fileManager =new FileManager("src/Assets/trainschedules.txt");
         String[] newScheduleData = {trainSCID, trainNumber, departureTime, arrivalTime, departureLocation, arrivalLocation, "Pending"};
         fileManager.addToFile(newScheduleData);
     }
     
+    //Constructor to modify data 
     public Admin(String[] newchanges){
         FileManager fileManager =new FileManager("src/Assets/trainschedules.txt");
         fileManager.editFileDataV2(newchanges[0], newchanges);

@@ -341,24 +341,10 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
                 }
             }
         }
-//        System.out.println(trainScheduleID);
-//        System.out.println(originalTrainNumber);
-//        System.out.println(originalDepartureTime);
-//        System.out.println(originalArrivalTime);
-//        System.out.println(originalDepartureLocation);
-//        System.out.println(originalArrivalLocation);
-//        System.out.println(originalStatus);
     }//GEN-LAST:event_ScheduleTableMouseClicked
 
     private void makeChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeChangesButtonActionPerformed
         // TODO add your handling code here:
-//        System.out.println();
-//        System.out.println(trainNumberTextField.getText());
-//        System.out.println(departureTimeTextField.getText());
-//        System.out.println(arrivalTimeTextField.getText());
-//        System.out.println(departureLocationTextField.getText());
-//        System.out.println(arrivalLocationTextField.getText());
-//        System.out.println(statusTextField.getText());
         boolean validTrainNo = false;
         boolean validTime = false;
         boolean validLocation = false;
@@ -366,13 +352,14 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         
         // Train Number
         if(InputValidation.isValidTrainNo(trainNumberTextField.getText())){
-            
+            validTrainNo = true;
         }
         else{
             JOptionPane.showMessageDialog(null, "Enter the correct TrainNo");
         }
         // Departure time and arrival time
-        if(InputValidation.isValidTime(departureTimeTextField.getText()) && InputValidation.isValidTime(arrivalTimeTextField.getText())){
+        if(InputValidation.isValidTime(departureTimeTextField.getText()) && 
+                InputValidation.isValidTime(arrivalTimeTextField.getText())){
             if(InputValidation.TimeCompare(departureTimeTextField.getText(), arrivalTimeTextField.getText())){
                 validTime = true;
             }
@@ -393,7 +380,7 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         }
         
         // status
-        if(statusTextField.getText().equals("Pending") || statusTextField.getText().equals("Pending")){
+        if(statusTextField.getText().equals("Done") || statusTextField.getText().equals("Pending")){
             validStatus = true;
         }
         else{
@@ -401,9 +388,12 @@ public class GUI_modifyTrainSchedule extends javax.swing.JFrame {
         }
         
         
-        if(!trainNumberTextField.getText().equals(originalTrainNumber) || !departureTimeTextField.getText().equals(originalDepartureTime) ||
-                !arrivalTimeTextField.getText().equals(originalArrivalTime) || !departureLocationTextField.getText().equals(originalDepartureLocation)||
-                !arrivalLocationTextField.getText().equals(originalArrivalLocation) || !statusTextField.getText().equals(originalStatus)){
+        if(!trainNumberTextField.getText().equals(originalTrainNumber) || 
+                !departureTimeTextField.getText().equals(originalDepartureTime) ||
+                !arrivalTimeTextField.getText().equals(originalArrivalTime) || 
+                !departureLocationTextField.getText().equals(originalDepartureLocation)||
+                !arrivalLocationTextField.getText().equals(originalArrivalLocation) || 
+                !statusTextField.getText().equals(originalStatus)){
             changesMade = true;
         }
         

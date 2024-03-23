@@ -16,9 +16,6 @@ import trainticket.Train;
  */
 public class Booking {
     private String bookingID;
-    private String bookingTime;
-    private Train bookedTrain;
-    private boolean paymentStatus;
     private double totalCost;
     private String inChargePassengerID;
     private Train instance;
@@ -53,7 +50,8 @@ public class Booking {
         String bookingID = searchForLatestBookingID();
         //Convert double to String
         String stringTotalCost = Double.toString(this.totalCost);
-        String[] bookingDetails = { bookingID, inChargePassengerID, instance.trainScheduleNumber, seatsSelectedLabel, stringTotalCost};
+        String[] bookingDetails = { bookingID, inChargePassengerID, instance.trainScheduleNumber, 
+            seatsSelectedLabel, stringTotalCost};
         
         FileManager fileManager = new FileManager("src/Assets/Bookings.txt");
         fileManager.addToFile(bookingDetails);

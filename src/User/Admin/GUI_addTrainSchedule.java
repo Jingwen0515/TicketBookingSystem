@@ -185,7 +185,8 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
          ArrayList<String[]> previousData = new FileManager("src/Assets/trainschedules.txt").saveTo2DArrayList();
         boolean validInformation = false;
         
-        if(!trainNumberTextField.getText().isEmpty()|| !departureTimeTextField.getText().isEmpty()|| !arrivalTimeTextField.getText().isEmpty()||
+        if(!trainNumberTextField.getText().isEmpty()|| !departureTimeTextField.getText().isEmpty()|| 
+                !arrivalTimeTextField.getText().isEmpty()||
                 !departureLocationTextField.getText().isEmpty()|| !arrivalLocationTextField.getText().isEmpty()){
             validInformation = true;
         }
@@ -199,7 +200,8 @@ public class GUI_addTrainSchedule extends javax.swing.JFrame {
         }
         
         if(validInformation){
-            Admin admin = new Admin(trainNumberTextField.getText(), departureTimeTextField.getText(), arrivalTimeTextField.getText(),
+            Admin admin = new Admin(trainNumberTextField.getText(), departureTimeTextField.getText(), 
+                    arrivalTimeTextField.getText(),
                 departureLocationTextField.getText(), arrivalLocationTextField.getText());
             JOptionPane.showMessageDialog(null, "Train Schedule successfully added");   
             GUI_AdminMainMenu gui_adminMainMenu = new GUI_AdminMainMenu();

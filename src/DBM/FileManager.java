@@ -12,6 +12,7 @@ public class FileManager {
     public FileManager(String fileName) {
         this.fileName = fileName;
     }
+    
     public ArrayList<String[]> saveTo2DArrayList(){
         ArrayList<String[]> ArrayList2D = new ArrayList();
         ArrayList<String> datalines = this.readFile();
@@ -24,34 +25,12 @@ public class FileManager {
     
     public void addToFile(String[] newObject){
         try{
-            //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(getClass().getResourceAsStream(fileName));
             FileWriter file = new FileWriter(fileName,true);
             BufferedWriter writer = new BufferedWriter(file);
             String line = String.join("|", newObject);
             writer.append(line);
             writer.append("\n");
             writer.close();     
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-   
-    public void removeLineFromFile(String primaryKey){
-        ArrayList<String[]> dataLines = this.saveTo2DArrayList();
-        try{
-            FileWriter file = new FileWriter(fileName);
-            BufferedWriter writer = new BufferedWriter(file);
-            for(String[] data:dataLines){
-                if(data[0].equals(primaryKey)){
-                    continue;
-                }
-                else{
-                    String line = String.join("|", data);
-                    writer.write(line+"\n");
-                    writer.flush();
-                }
-            }
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -67,21 +46,6 @@ public class FileManager {
                  result.add(arrayData);
              }
          }
-        return result;
-    }
- 
-    public ArrayList<String[]> searchData(String target){
-        ArrayList<String> dataLine = this.readFile();
-        ArrayList<String[]> result = new ArrayList<String[]>();
-        for(int i = 0; i<dataLine.size();i++){
-            String[] arrayData = dataLine.get(i).split("\\|");
-            for(int j = 0;j< arrayData.length;j++){
-                    String fileString = arrayData[j].toLowerCase();
-                    if(fileString.equals(target)){
-                        result.add(arrayData);
-                    }
-                }
-        }
         return result;
     }
     
@@ -100,59 +64,6 @@ public class FileManager {
             JOptionPane.showMessageDialog(null, "Not a PK");
         }
         return result;
-    }
-    
-    public void editFile(String[] targetLine, String[] newLine) {
-
-        ArrayList<String[]> dataLines = this.saveTo2DArrayList();
-        for(int i =0 ; i <dataLines.size();i++){
-
-            if(Arrays.equals(dataLines.get(i) ,targetLine)){
-                dataLines.set(i, newLine);
-            }
-        }
-        
-        try{
-            FileWriter file = new FileWriter(fileName);
-            BufferedWriter writer = new BufferedWriter(file);
-            for(String[] data:dataLines){
-                String line = String.join("|", data);
-                writer.write(line+"\n");
-                writer.flush();         
-            }
-            
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-    
-    public void editFileDataV1(String[] targetLine, int dataIndexToChange, String newData) {
-        ArrayList<String[]> dataLines = this.saveTo2DArrayList();
-        for (int i = 0; i < dataLines.size(); i++) {
-            if (Arrays.equals(dataLines.get(i), targetLine)) {
-                if (dataIndexToChange >= 0 && dataIndexToChange < targetLine.length) {
-                    dataLines.get(i)[dataIndexToChange] = newData;
-                    break; // No need to continue looping if the target line is found and data changed
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid data index");
-                    return; // Exit method if the data index is invalid
-                }
-            }
-        }
-
-        try {
-            FileWriter file = new FileWriter(fileName);
-            BufferedWriter writer = new BufferedWriter(file);
-            for (String[] data : dataLines) {
-                String line = String.join("|", data);
-                writer.write(line + "\n");
-            }
-            writer.flush();
-            writer.close(); // Close the writer after writing data
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
     
     public void editFileDataV2(String primaryKey, String[] newData) {

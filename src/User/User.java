@@ -59,35 +59,6 @@ public class User {
         return savedData;
     }
     
-//    public static String[] loginAccess(String loginUserID,String loginPassword){
-//        FileManager file = new FileManager("User.txt");
-//        ArrayList<String> userData = file.readFile();
-//        String[] savedData = new String[7];
-//        int count = 0; 
-//
-//        for(int i=0 ; i< userData.size();i++){
-//            String line = userData.get(i);
-//            String[] data = line.split("\|");
-//
-//            if (loginUserID.equals(data[0]) && loginPassword.equals(data[1])){
-//                savedData = data;
-//                count++;
-//            }
-//        }
-//
-//        if (count == 0){
-//            savedData[5] = "fail";
-//            return savedData;
-//        }
-//        else if (count == 1){
-//            return savedData;
-//        }
-//        else{
-//            savedData[5] = "fail";
-//            return savedData;
-//        }
-//    }
-    
     public String getUserRole(){
         return this.role;
     }

@@ -50,7 +50,8 @@ public class GUI_Booking extends javax.swing.JFrame {
         }
         this.current_passenger = currentPassenger;
         this.buy_ticket = buyTicket;
-        String[] ScheduleData = new FileManager("src/Assets/trainschedules.txt").searchByPrimaryKey(buy_ticket.getTrainScheduleNumber());
+        String[] ScheduleData = new FileManager("src/Assets/trainschedules.txt").
+                searchByPrimaryKey(buy_ticket.getTrainScheduleNumber());
         displayScheduleTable(ScheduleData);
         setCheckSeatDisable();
         
@@ -1333,7 +1334,8 @@ public class GUI_Booking extends javax.swing.JFrame {
         }
         
         else{
-            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel, totalFee);
+            Booking new_booking = new Booking(buy_ticket, current_passenger, seatsSelectedLabel,
+                    totalFee);
             JOptionPane.showMessageDialog(null,"You have successfully booked your tickets."
                     + " Please go to the 'Show My Bookings' to view your ticket");
             GUI_PassengerMainMenu passengerMainMenu = new GUI_PassengerMainMenu(current_passenger);
@@ -1378,11 +1380,11 @@ public class GUI_Booking extends javax.swing.JFrame {
         model.addRow(scheduleData);
     }
     
-    private String[] getUnvailableSeats(){
-        String[] unavailableSeats;
-        
-        return null;
-    }
+//    private String[] getUnvailableSeats(){
+//        String[] unavailableSeats;
+//        
+//        return null;
+//    }
     
     public double calculateTotalFee(JCheckBox checkBox) {
         
@@ -1422,7 +1424,7 @@ public class GUI_Booking extends javax.swing.JFrame {
     public void updateSelectedSeatsLabel(JCheckBox checkbox, ArrayList<String> selectedSeats) {
         // Assuming your label is named selectedSeatsLabel
         String labelText = seatsSelectedLabel.getText(); // Get the current text of the label
-        String seatName = checkbox.getName(); // Get the text of the checkbox (assuming it contains seat information)
+        String seatName = checkbox.getName(); // Get the text of the checkbox
 
         if (checkbox.isSelected()) {
             selectedSeats.add(seatName);

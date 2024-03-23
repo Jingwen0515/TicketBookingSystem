@@ -197,9 +197,6 @@ public void displayBookingTable(){
     for(int i = 0 ; i < displayList.size() ; i++){
         model.addRow(displayList.get(i));
     }
-
-
-    // BID, TSID, Seat, TN, DepartureTime, ArrivalTime, DepartureLocation, ArrivalLocation, TotalCost
 }
 
     

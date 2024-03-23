@@ -320,46 +320,14 @@ public class GUI_RegisterNewUser extends javax.swing.JFrame {
         
         if(!usernameIsTaken && repeatPasswordSimilar && validEmail && validPhoneNumber ){
             String newPassengerID = searchForLatestPassengerID();
-            String[] newUserData = {newPassengerID,newUsername,passwordString1,newEmail.getText(),"passenger",newFirstName.getText(),newLastName.getText()};
+            String[] newUserData = {newPassengerID,newUsername,passwordString1,newEmail.getText(),"passenger",
+                newFirstName.getText(),newLastName.getText()};
             fileManager.addToFile(newUserData);
             JOptionPane.showMessageDialog(null, "Account Successfully Created!");
             GUI_Login_Application login = new GUI_Login_Application();
             login.setVisible(true);
             dispose();
         }
-        
-//        try (BufferedReader reader = new BufferedReader(new FileReader("src/Assets/userdata.txt"))) {
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                String[] parts = line.split(",");
-//                if (parts.length >= 2 && parts[0].equals(newUsername)) {
-//                    JOptionPane.showMessageDialog(null, "UserID: " + newUsername + " is taken. Please choose another username.");
-//                    usernameIsTaken = true;
-//                    break;
-//                }
-//            }
-//
-//            if (passwordString1.equals(passwordString2)) {
-//                repeatPasswordSimilar = true;
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Password re-entered does not match.");
-//            }
-//
-//            if (!usernameIsTaken && repeatPasswordSimilar) {
-//                try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Assets/userdata.txt", true))) {
-//                    String userData = newUsername + "," + passwordString1 + "," + newEmail.getText() + ",user," + newFirstName.getText() + "," + newLastName.getText() + "\n";
-//                    writer.write(userData);
-//                    JOptionPane.showMessageDialog(null, "Account Successfully Created!");
-//                    GUI_Login_Application login = new GUI_Login_Application();
-//                    login.setVisible(true);
-//                    dispose();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
     private void newEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newEmailActionPerformed
